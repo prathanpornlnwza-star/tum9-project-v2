@@ -1,0 +1,304 @@
+.card-about-main {
+  position: relative;
+  z-index: 1;
+  width: min(1320px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: clamp(48px, 7vw, 82px) 0 64px;
+}
+
+.card-about-intro {
+  max-width: 760px;
+  margin: 0 auto clamp(48px, 7vw, 76px);
+  text-align: center;
+}
+
+.card-about-eyebrow {
+  color: #d7b7f0;
+  font-size: .72rem;
+  letter-spacing: .18em;
+}
+
+.card-about-intro h1 {
+  margin: 14px 0 12px;
+  background: linear-gradient(100deg, #f8edff 18%, #d2a7ff 58%, #9bdcff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.35;
+}
+
+.card-about-intro > p {
+  color: #c8bddb;
+  font-size: clamp(.92rem, 1.5vw, 1.05rem);
+  line-height: 1.9;
+}
+
+.card-about-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 22px;
+  padding: 9px 16px;
+  border: 1px solid #d5b5ff68;
+  border-radius: 999px;
+  color: #f5eaff;
+  background: #9a5bd522;
+  font-size: .85rem;
+  transition: background .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+.card-about-back:hover {
+  transform: translateY(-2px);
+  border-color: #e4c4ff;
+  background: #9a5bd54a;
+}
+
+.card-about-back span {
+  color: #e2bdff;
+}
+
+.card-about-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+
+.card-about-heading h2 {
+  margin-top: 7px;
+  color: #f7efff;
+  font-size: clamp(1.45rem, 3vw, 2rem);
+  font-weight: 500;
+}
+
+.card-about-count {
+  color: #c8bddb;
+  font-size: .86rem;
+}
+
+.card-about-search {
+  display: grid;
+  gap: 8px;
+  max-width: 520px;
+  color: #d8cde7;
+  font-size: .84rem;
+}
+
+.card-about-search input {
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 14px;
+  border: 1px solid #d5b5ff40;
+  border-radius: 12px;
+  outline: none;
+  color: #fff;
+  background: #160d24cc;
+  font: inherit;
+}
+
+.card-about-search input::placeholder {
+  color: #9585aa;
+}
+
+.card-about-search input:focus {
+  border-color: #d2a7ff;
+  box-shadow: 0 0 0 3px #a35cf333;
+}
+
+.card-about-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 18px 0 24px;
+}
+
+.card-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 7px 12px;
+  border: 1px solid #d5b5ff35;
+  border-radius: 999px;
+  color: #d8cde7;
+  background: #ffffff08;
+  font: inherit;
+  font-size: .8rem;
+  cursor: pointer;
+  transition: border-color .2s ease, background .2s ease, color .2s ease;
+}
+
+.card-filter span {
+  color: #aa91c5;
+  font-size: .72rem;
+}
+
+.card-filter:hover,
+.card-filter.is-active {
+  border-color: #d5b5ffb0;
+  color: #fff;
+  background: #9a5bd544;
+}
+
+.card-filter.is-active span {
+  color: #f0d8ff;
+}
+
+.card-about-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.card-about-item {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #d5b5ff30;
+  border-radius: 16px;
+  background: linear-gradient(155deg, #21152fdd, #110b1cf2);
+  box-shadow: 0 16px 38px #00000038, inset 0 1px #ffffff08;
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+
+.card-about-item:hover {
+  transform: translateY(-5px);
+  border-color: #d5b5ff8c;
+  box-shadow: 0 22px 42px #00000059, 0 0 24px #a35cf333;
+}
+
+.card-about-art {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 5 / 7;
+  background: #181026;
+}
+
+.card-about-art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .45s ease;
+}
+
+.card-about-item:hover .card-about-art img {
+  transform: scale(1.04);
+}
+
+.card-about-number {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  left: 10px;
+  color: #f1e2ff;
+  font-family: 'Cinzel', serif;
+  font-size: .62rem;
+  letter-spacing: .1em;
+  text-shadow: 0 1px 8px #000;
+}
+
+.card-about-copy {
+  padding: 15px 15px 18px;
+}
+
+.card-about-name {
+  color: #f7efff;
+  font-family: 'Cinzel', serif;
+  font-size: .96rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.card-about-thai-name {
+  margin-top: 3px;
+  color: #d8c2f0;
+  font-size: .82rem;
+  line-height: 1.7;
+}
+
+.card-about-counterpart {
+  margin-top: 8px;
+  color: #b7a4cc;
+  font-size: .72rem;
+}
+
+.card-about-keywords {
+  margin-top: 10px;
+  color: #e5c998;
+  font-size: .75rem;
+  line-height: 1.7;
+}
+
+.card-about-description {
+  margin-top: 8px;
+  color: #c8bddb;
+  font-size: .78rem;
+  line-height: 1.8;
+}
+
+.card-about-empty {
+  padding: 42px 12px;
+  color: #c8bddb;
+  text-align: center;
+}
+
+@media (max-width: 1000px) {
+  .card-about-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+
+@media (max-width: 700px) {
+  .card-about-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .card-about-copy {
+    padding: 12px 12px 15px;
+  }
+
+  .card-about-name {
+    font-size: .82rem;
+  }
+
+  .card-about-description {
+    font-size: .74rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .card-about-main {
+    width: calc(100% - 28px);
+    padding-top: 40px;
+  }
+
+  .card-about-heading {
+    display: block;
+  }
+
+  .card-about-count {
+    margin-top: 6px;
+  }
+
+  .card-about-filters {
+    gap: 7px;
+  }
+
+  .card-filter {
+    padding: 6px 9px;
+    font-size: .72rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-about-back,
+  .card-filter,
+  .card-about-item,
+  .card-about-art img {
+    transition: none;
+  }
+}

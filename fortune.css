@@ -1,3 +1,102 @@
+
+.about-main {
+  position: relative;
+  z-index: 1;
+  margin: 0 auto;
+}
+
+.about-intro {
+  
+  text-align: center;
+}
+
+.about-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: #d7b7f0;
+  font-size: .75rem;
+  letter-spacing: .19em;
+}
+
+.about-eyebrow span {
+  color: #e2bdff;
+  font-size: 1.15rem;
+}
+
+.about-intro h1 {
+  margin: 15px 0 12px;
+  background: linear-gradient(100deg, #f8edff 18%, #d2a7ff 58%, #9bdcff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: clamp(2rem, 5vw, 3.8rem);
+  line-height: 1.3;
+  text-shadow: none;
+}
+
+.about-intro > p {
+  margin: 0 auto;
+  color: #c8bddb;
+  font-size: clamp(.92rem, 1.5vw, 1.05rem);
+  line-height: 1.95;
+  text-shadow: none;
+}
+
+.about-explore {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 27px;
+  padding: 11px 18px;
+  border: 1px solid #d5b5ff68;
+  border-radius: 999px;
+  color: #f5eaff;
+  background: #9a5bd522;
+  font-size: .9rem;
+  transition: background .25s ease, border-color .25s ease, transform .25s ease, box-shadow .25s ease;
+}
+
+.about-explore:hover {
+  transform: translateY(-2px);
+  border-color: #e4c4ff;
+  background: #9a5bd54a;
+  box-shadow: 0 0 22px #a35cf348;
+}
+
+.about-explore span {
+  color: #e2bdff;
+  font-size: 1.15rem;
+  transition: transform .25s ease;
+}
+
+.about-explore:hover span {
+  transform: translate(2px, -2px);
+}
+
+.section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+
+}
+
+.section-heading h2 {
+  color: #f7efff;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.section-heading > p {
+  max-width: 330px;
+  color: #bcaecb;
+  font-size: .9rem;
+  line-height: 1.8;
+  text-shadow: none;
+}
+
+
 .service-stage {
   position: relative;
   z-index: 1;
