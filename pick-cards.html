@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ไพ่ทาโร่ | เลือกไพ่ทำนาย</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="pick-cards.css" />
+  <link rel="stylesheet" href="home-chat.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container-nav">
+      <a class="logo" href="index.html">
+        <span>TUM9</span>
+      </a>
+      <nav>
+        <ul class="nbr">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="fortune.html">Fortune</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <ul class="nbr account-links">
+          <li><a href="login.html">Login</a></li>
+          <li><a href="register.html">Register</a></li>
+          <li><a href="profile.html">Profile</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="pick-container">
+    <div class="pick-header">
+      <p class="sub-brand">TUM . TAROT</p>
+      <h1 class="main-title">เลือกไพ่ทาโรต์</h1>
+      <div class="status-bar">
+        <span class="badge">หมวด: <strong id="topicLabel">ความรัก</strong></span>
+        <span class="badge">กองไพ่: <strong id="deckTypeLabel">Major Arcana (22 ใบ)</strong></span>
+        <span class="badge highlight">เลือกแล้ว: <strong id="pickedCounter">0 / 1</strong> ใบ</span>
+      </div>
+      <p class="instruction" id="instructionText">ตั้งจิตอธิษฐานให้มั่น แล้วคลิกเลือกไพ่ที่ดึงดูดใจคุณ</p>
+    </div>
+
+    <!-- พื้นที่คลี่กองไพ่คว่ำหน้า -->
+    <div class="deck-spread-wrapper">
+      <div id="cardSpreadArea" class="card-spread-area"></div>
+    </div>
+
+    <!-- ช่องแสดงไพ่ที่ถูกหยิบมาแล้ว -->
+    <div class="selected-slots-section">
+      <p class="slots-title">ไพ่ที่คุณเลือก</p>
+      <div id="selectedSlots" class="selected-slots"></div>
+    </div>
+
+    <!-- ปุ่มควบคุม -->
+    <div class="action-buttons">
+      <button type="button" id="shuffleBtn" class="secondary-btn">สับไพ่ใหม่</button>
+      <button type="button" id="revealBtn" class="primary-btn" disabled>เปิดคำทำนาย</button>
+    </div>
+
+    <a href="taro_2.html" class="back-link">← เปลี่ยนหมวดหมู่ทำนาย</a>
+  </main>
+
+  <!-- โหลดฐานข้อมูลไพ่ทั้ง 78 ใบมาก่อน -->
+  <script src="tarotData.js"></script>
+  <script src="pick-cards.js"></script>
+  <script src="home-chat.js"></script>
+</body>
+</html>

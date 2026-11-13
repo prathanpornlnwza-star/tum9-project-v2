@@ -5,25 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="style.css" rel="stylesheet">
   <title>ไพ่ทาโร่ | เลือกหัวข้อทำนาย</title>
-  <link rel="stylesheet" href="taro.css" />
+  <link rel="stylesheet" href="taro.css">
   <link rel="stylesheet" href="home-chat.css">
-  <!-- ฟอนต์ Cinzel และ Prompt เพื่อความขลังและอ่านง่าย -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Prompt:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
   <header class="site-header">
     <div class="container-nav">
-      <a class="logo" href="index.html" >
+      <a class="logo" href="index.html">
         <span>TUM9</span>
       </a>
       <nav>
         <ul class="nbr">
-          <li><a href="index.html" >Home</a></li>
-          <li><a href="fortune.html" >Fortune</a></li>
-          <li><a href="about.html" >About</a></li>
-          <li><a href="contact.html" >Contact</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="fortune.html">Fortune</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
         <ul class="nbr account-links">
           <li><a href="login.html">Login</a></li>
@@ -33,36 +32,133 @@
       </nav>
     </div>
   </header>
-  <!-- MainContainer -->
+
   <main class="container">
     <div class="tarot-card-modal">
       <header class="modal-header">
         <p class="sub-brand">TUM . TAROT</p>
         <h1 class="main-title">Tarot Reading</h1>
-        <p class="description">เลือกเรื่องที่คุณต้องการค้นหาคำตอบ แล้วตั้งจิตอธิษฐาน</p>
+        <p class="description">เลือกหมวดหมู่ที่ต้องการค้นหาคำตอบ แล้วตั้งจิตอธิษฐาน</p>
       </header>
 
-      <!-- Category choice -->
+      <!-- หมวดหมู่ 9 รายการสไตล์ MyHora (จัดเรียง 3x3) -->
       <div class="category-grid">
+        <!-- 1. รายวัน -->
+        <button type="button" class="category-btn" data-category="รายวัน">
+          <span class="icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="3" y="4" width="18" height="18" rx="3" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+              <text x="12" y="18" text-anchor="middle" font-size="7" font-weight="bold" fill="currentColor" stroke="none">1</text>
+            </svg>
+          </span>
+          <span class="sub-label">ไพ่ยิปซี</span>
+          <span class="label">รายวัน</span>
+        </button>
+
+        <!-- 2. รายเดือน -->
+        <button type="button" class="category-btn" data-category="รายเดือน">
+          <span class="icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="3" y="4" width="18" height="18" rx="3" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+              <text x="12" y="18" text-anchor="middle" font-size="6.5" font-weight="bold" fill="currentColor" stroke="none">31</text>
+            </svg>
+          </span>
+          <span class="sub-label">ไพ่ยิปซี</span>
+          <span class="label">รายเดือน</span>
+        </button>
+
+        <!-- 3. ความรัก -->
         <button type="button" class="category-btn" data-category="ความรัก">
-          <span class="icon"><img src="logo/cupid.png" alt=""></span>
+          <span class="icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M12 21s-7-4.5-9-9.2C1.4 8.1 4 4.5 7.5 4.5c2 0 3.6 1.1 4.5 2.6.9-1.5 2.5-2.6 4.5-2.6 3.5 0 6.1 3.6 4.5 7.3C19 16.5 12 21 12 21z" />
+            </svg>
+          </span>
+          <span class="sub-label">ไพ่ยิปซี</span>
           <span class="label">ความรัก</span>
         </button>
-        <button type="button" class="category-btn" data-category="การงาน">
-          <span class="icon"><img src="logo/airplane.png" alt=""></span>
-          <span class="label">การงาน</span>
-        </button>
-        <button type="button" class="category-btn" data-category="การเงิน">
-          <span class="icon"><img src="logo/diagram.png" alt=""></span>
-          <span class="label">การเงิน</span>
-        </button>
+
+        <!-- 4. การเรียน -->
         <button type="button" class="category-btn" data-category="การเรียน">
-          <span class="icon"><img src="logo/graduation-hat.png" alt=""></span>
+          <span class="icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <polygon points="12 3 2 8 12 13 22 8 12 3" />
+              <path d="M6 10.5v5.5c0 1.8 2.7 3.2 6 3.2s6-1.4 6-3.2v-5.5" />
+              <line x1="22" y1="8" x2="22" y2="15" />
+            </svg>
+          </span>
+          <span class="sub-label">ไพ่ยิปซี</span>
           <span class="label">การเรียน</span>
         </button>
-        <button type="button" class="category-btn span-all" data-category="อนาคต">
-          <span class="icon"><img src="logo/hourglass.png" alt=""></span>
-          <span class="label">อนาคต</span>
+
+        <!-- 5. การงาน -->
+        <button type="button" class="category-btn" data-category="การงาน">
+          <span class="icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="3" y="7" width="18" height="13" rx="2.5" />
+              <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+            </svg>
+          </span>
+          <span class="sub-label">ไพ่ยิปซี</span>
+          <span class="label">การงาน</span>
+        </button>
+
+        <!-- 6. การเงิน -->
+        <button type="button" class="category-btn" data-category="การเงิน">
+          <span class="icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9">
+              <line x1="12" y1="3" x2="12" y2="21" />
+              <path d="M16.5 7.5c0-2-2-3.2-4.5-3.2s-4.5 1.2-4.5 3.2c0 4.5 9 3.5 9 8.2 0 2.1-2 3.5-4.5 3.5s-4.5-1.3-4.5-3.5" />
+            </svg>
+          </span>
+          <span class="sub-label">ไพ่ยิปซี</span>
+          <span class="label">การเงิน</span>
+        </button>
+
+        <!-- 7. สุขภาพ -->
+        <button type="button" class="category-btn" data-category="สุขภาพ">
+          <span class="icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+          </span>
+          <span class="sub-label">ไพ่ยิปซี</span>
+          <span class="label">สุขภาพ</span>
+        </button>
+
+        <!-- 8. บริวาร -->
+        <button type="button" class="category-btn" data-category="บริวาร">
+          <span class="icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <circle cx="9" cy="8" r="3" />
+              <circle cx="16" cy="9" r="2.5" />
+              <path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5" />
+              <path d="M14.5 19c0-2.2 1.7-3.8 4-3.8 1.2 0 2.2.4 2.8 1.2" />
+            </svg>
+          </span>
+          <span class="sub-label">ไพ่ยิปซี</span>
+          <span class="label">บริวาร</span>
+        </button>
+
+        <!-- 9. โชคลาภ -->
+        <button type="button" class="category-btn" data-category="โชคลาภ">
+          <span class="icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <circle cx="7.5" cy="7.5" r="2.2" />
+              <circle cx="16.5" cy="16.5" r="2.2" />
+            </svg>
+          </span>
+          <span class="sub-label">ไพ่ยิปซี</span>
+          <span class="label">โชคลาภ</span>
         </button>
       </div>
 
@@ -70,7 +166,6 @@
         Continue
       </button>
     </div>
-
   </main>
 
   <script src="taro.js"></script>

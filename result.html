@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ไพ่ทาโร่ | ผลการทำนาย</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="result.css" />
+  <link rel="stylesheet" href="home-chat.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container-nav">
+      <a class="logo" href="index.html">
+        <span>TUM9</span>
+      </a>
+      <nav>
+        <ul class="nbr">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="fortune.html">Fortune</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <ul class="nbr account-links">
+          <li><a href="login.html">Login</a></li>
+          <li><a href="register.html">Register</a></li>
+          <li><a href="profile.html">Profile</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="result-container">
+    <div class="result-header">
+      <p class="sub-brand">TUM . TAROT</p>
+      <h1 class="main-title">คำทำนายไพ่ทาโรต์</h1>
+      <div class="status-bar">
+        <span class="badge">หมวดหมู่: <strong id="resultCategory">ความรัก</strong></span>
+        <span class="badge">จำนวนไพ่: <strong id="resultCount">1 ใบ</strong></span>
+      </div>
+      <p class="instruction" id="flipHint">คลิกที่ใบไพ่เพื่อเปิดดูคำทำนาย หรือกดปุ่มเปิดไพ่ทั้งหมดด้านล่าง</p>
+
+      <div class="top-actions">
+        <button type="button" id="flipAllBtn" class="primary-btn">เปิดไพ่ทั้งหมด</button>
+        <a href="pick-cards.html" class="secondary-btn">เลือกไพ่ใหม่</a>
+        <a href="taro.html" class="secondary-btn">เปลี่ยนหมวดทำนาย</a>
+      </div>
+    </div>
+
+    <!-- พื้นที่วางผังไพ่ (1 ใบ หรือ 10 ใบ Celtic Cross) -->
+    <section id="spreadBoard" class="spread-board"></section>
+
+    <!-- พื้นที่แสดงคำทำนายละเอียด -->
+    <section id="readingsList" class="readings-list"></section>
+  </main>
+
+  <script src="tarotData.js"></script>
+  <script src="result.js"></script>
+  <script src="home-chat.js"></script>
+</body>
+</html>
