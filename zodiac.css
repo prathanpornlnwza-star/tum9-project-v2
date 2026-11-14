@@ -1,0 +1,271 @@
+body{
+    margin: 0;
+}
+.main{
+    z-index: 10;
+}
+.p{
+    color: rgb(248, 244, 255);
+    text-shadow: 0 0 10px rgb(22, 0, 56);
+    font-size: 30px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.disc{
+    color: rgb(188, 146, 255);
+    /* text-shadow: 0 0 10px rgba(236, 214, 255, 0.8); */
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+.disc-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.box1{
+    position: relative;
+    height: 70%;
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+    opacity: 1;
+    transition: opacity 0.15s ease-in-out;
+}
+.box1.fade-out {
+    opacity: 0;
+}
+.btn img {
+    width: 200px;      
+    height: auto; 
+    vertical-align: middle;
+    margin: 0px;
+    padding: 0px;
+    border-radius: 20px;
+}
+.btn{
+    margin: 10px;
+    padding: 0px;
+    background: rgba(255, 255, 255, 0.05); 
+    border: 1px solid rgba(255, 255, 255, 0.517); 
+    border-radius: 20px; 
+    cursor: pointer;
+    overflow: hidden;
+    transition: 0.4s;
+}
+.btn:hover{
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(186, 104, 200, 0.8); 
+    border-color: #ba68c8; 
+}
+.btn.active {
+    transform: scale(1.1); 
+    box-shadow: 0 0 25px rgb(193, 113, 254);
+    border-color: #f3e5f5;
+}
+.rs {
+    display: inline-flex;           
+    justify-content: center; 
+    align-items: center;
+    width: auto;     
+    margin: 0;             
+    padding: 12px 25px;  
+    background: linear-gradient(90deg, rgb(146, 78, 255), rgb(45, 0, 134));
+    color: white;
+    font-size: 16px;       
+    cursor: pointer;
+    border-radius: 25px; 
+    border: none;
+    transition: 0.4s;
+}
+.rs:hover{
+    transform: scale(1.01);
+    box-shadow: 0 0 20px rgba(186, 104, 200, 0.8); 
+    border-color: #ba68c8; 
+}
+.rs:active{
+    transform: scale(1.05); 
+    box-shadow: 0 0 25px rgb(193, 113, 254);
+    border-color: #f3e5f5;
+}
+.bt {
+    display: flex;      
+    justify-content: center; 
+    align-items: center;  
+    gap: 15px;             
+    width: 100%;
+    max-width: 900px;
+    margin: 30px auto;     
+    flex-wrap: wrap;       
+}
+.ra{
+    font-size: 20px;
+    margin-left: 0;
+    color: rgb(255, 255, 255);
+    /* text-shadow: 0 0 10px rgba(246, 194, 255, 0.8); */
+}
+#out {
+    color: #f9d8ff;          
+    font-size: 20px;         
+    font-weight: bold;       
+    /* text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);  */
+    margin-left: 0px;
+    margin-top: -1px;
+}
+.pop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    backdrop-filter: blur(10px);       
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;          
+}
+.rb {
+    position: relative;
+    background: linear-gradient(180deg, #26194b, #0b0518);
+    border: 1px solid rgba(250, 250, 250, 0.6);
+    border-radius: 20px;
+    padding: 40px 30px;
+    height: 70%;
+    width: 70%;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(186, 104, 200, 0.5);
+}
+.close{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(13, 13, 13, 0.305);
+    height: 50px;
+    width: 50px;
+    font-size: 30px;
+    color: white;
+    border-radius: 50%;
+    border: 1px solid rgba(186, 104, 200, 0.3);
+    cursor: pointer;
+    transition:  0.4s;
+}
+.close:hover{
+    background: rgba(255, 255, 255, 0.199); 
+}
+.close:active{
+    background: rgba(255, 255, 255, 0.05); 
+}
+.h{
+    color: rgb(225, 203, 255);
+    /* text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); */
+    font-size: 20px;
+    margin-top: 0px;
+    margin-bottom: 13px;
+    text-align: center;
+}
+
+
+.result-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 25px;
+    margin-top: 20px;
+    text-align: left;
+    height: calc(100% - 60px); 
+}
+
+
+.result-left {
+    flex: 0 0 30%;
+    display: flex;          
+    flex-direction: column; 
+    align-items: center;    
+    text-align: center;
+    margin-top: 30px;
+}
+
+#rafi {
+    color: #e1cbff;
+    font-size: 18px;
+    font-weight: bold;
+    /* text-shadow: 0 0 10px rgba(186, 104, 200, 0.8); */
+    margin-bottom: 30px; 
+}
+
+.popup-zodiac-img {
+    width: 100%;
+    max-width: 300px;
+    padding-left: 10px;
+    height: auto;
+    border-radius: 15px;
+    /* box-shadow: 0 0 20px rgba(186, 104, 200, 0.8); */
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.result-right {
+    margin-top: 30px;
+    flex: 1;
+    max-height: 360px;   
+    max-width: 800px;
+    padding-right: 10px;
+    padding-left: 10px;
+    overflow-y: auto;
+}
+
+.rt {
+    font-size: 15px;
+    line-height: 1.6;
+    color: white;
+}
+
+/* 🌟 สไตล์ปุ่มสวิตช์โหมดราศี */
+.zodiac-mode-switch {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.mode-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.mode-btn:hover {
+    border-color: #ba68c8;
+    box-shadow: 0 0 10px rgba(186, 104, 200, 0.5);
+}
+
+.mode-btn.active {
+    background: linear-gradient(90deg, rgb(146, 78, 255), rgb(45, 0, 134));
+    border-color: #f3e5f5;
+    box-shadow: 0 0 15px rgb(193, 113, 254);
+    font-weight: bold;
+}
+
+
+::-webkit-scrollbar {
+  width: 6px; 
+}
+
+
+::-webkit-scrollbar-thumb {
+  background: rgba(180, 160, 255, 0.35); 
+  border-radius: 10px; 
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(215, 195, 255, 0.65); 
+}

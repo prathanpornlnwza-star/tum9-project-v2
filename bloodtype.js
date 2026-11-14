@@ -1,3 +1,8 @@
+// ตั้งค่าโฟลเดอร์และนามสกุลรูปภาพ (ถ้าโฟลเดอร์ชื่อ card ไม่มี s ให้แก้เป็น 'card/')
+const ORACLE_FOLDER = 'cards/';
+const ORACLE_EXT = '.jpg';
+const ORACLE_BACK_IMG = `${ORACLE_FOLDER}Back Card${ORACLE_EXT}`;
+
 // 1. ข้อมูลคำทำนายรายบุคคลครบทั้ง 6 หมวดหมู่
 const bloodTypeDetails = {
   A: {
@@ -59,6 +64,7 @@ const oracleCardsData = [
     numeral: "I",
     symbol: "🌑",
     name: "THE ECLIPSE",
+    image: `${ORACLE_FOLDER}THE ECLIPSE${ORACLE_EXT}`,
     thaiTitle: "สุริยุปราคา — จุดเปลี่ยนและการปล่อยวาง",
     readings: {
       A: "ถึงเวลาวางความกังวลและมาตรฐานที่สูงเกินไปลงชั่วคราว สิ่งที่คุณพยายามควบคุมกำลังจะคลี่คลายด้วยตัวของมันเอง",
@@ -72,6 +78,7 @@ const oracleCardsData = [
     numeral: "II",
     symbol: "✦",
     name: "THE SUPERNOVA",
+    image: `${ORACLE_FOLDER}THE SUPERNOVA${ORACLE_EXT}`,
     thaiTitle: "ซูเปอร์โนวา — โอกาสและประกายไฟ",
     readings: {
       A: "ความละเอียดรอบคอบที่คุณสะสมมาตลอดกำลังจะออกดอกผล เตรียมรับข่าวดีเรื่องงานหรือโปรเจกต์ที่ซุ่มทำมานาน",
@@ -85,6 +92,7 @@ const oracleCardsData = [
     numeral: "III",
     symbol: "☽",
     name: "THE CRESCENT MOON",
+    image: `${ORACLE_FOLDER}THE CRESCENT MOON${ORACLE_EXT}`,
     thaiTitle: "จันทร์เสี้ยว — ความรักและความรู้สึก",
     readings: {
       A: "ความใส่ใจเล็กๆ น้อยๆ ของคุณมีค่าเสมอ แต่อย่าลืมรักและใจดีกับตัวเองให้เท่ากับที่คุณมอบให้คนอื่น",
@@ -98,6 +106,7 @@ const oracleCardsData = [
     numeral: "IV",
     symbol: "🌌",
     name: "THE NEBULA",
+    image: `${ORACLE_FOLDER}THE NEBULA${ORACLE_EXT}`,
     thaiTitle: "เนบิวลา — การเยียวยาและโชคลาภ",
     readings: {
       A: "พักสายตาจากหน้าจอและความเครียดสะสม จักรวาลกำลังส่งสัญญาณให้คุณชาร์จพลัง โชคลาภจะมาจากการเดินทางสั้นๆ หรือการพักผ่อน",
@@ -232,7 +241,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let selectedOracleGroup = 'A';
   let isCardPicked = false;
 
-  // ฟังก์ชันสุ่มลำดับไพ่ (Fisher-Yates Shuffle)
   const shuffleCards = (cards) => {
     const array = [...cards];
     for (let i = array.length - 1; i > 0; i--) {
@@ -242,7 +250,6 @@ document.addEventListener('DOMContentLoaded', () => {
     return array;
   };
 
-  // สร้างและวางไพ่คว่ำหน้า 4 ใบบนกระดาน
   const setupOracleDeck = () => {
     isCardPicked = false;
     oracleReadingBox.classList.remove('show');
@@ -259,18 +266,10 @@ document.addEventListener('DOMContentLoaded', () => {
       cardEl.innerHTML = `
         <div class="oracle-card-inner">
           <div class="oracle-card-face oracle-card-back">
-            <div class="card-back-frame">
-              <span class="card-back-stars">✦ ✧ ✦</span>
-              <span class="card-back-moon">☽</span>
-              <span class="card-back-stars">✧ ✦ ✧</span>
-              <span class="card-back-label">TUM9 ORACLE</span>
-            </div>
+            <img src="${ORACLE_BACK_IMG}" alt="Back Card" class="oracle-card-img">
           </div>
           <div class="oracle-card-face oracle-card-front">
-            <span class="card-front-numeral">✦ ${card.numeral} ✦</span>
-            <span class="card-front-symbol">${card.symbol}</span>
-            <div class="card-front-title">${card.name}</div>
-            <div class="card-front-thai">${card.thaiTitle.split('—')[0].trim()}</div>
+            <img src="${card.image}" alt="${card.name}" class="oracle-card-img">
           </div>
         </div>
       `;
@@ -279,7 +278,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isCardPicked) return;
         isCardPicked = true;
 
-        // พลิกใบที่เลือกและทำให้ใบอื่นจางลง
         const allCards = oracleDeck.querySelectorAll('.oracle-card');
         allCards.forEach(c => {
           if (c === cardEl) {
@@ -291,7 +289,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         oracleInstruction.innerText = `✧ จักรวาลได้เปิดเผยคำทำนายสำหรับกรุ๊ป ${selectedOracleGroup} แล้ว ✧`;
 
-        // แสดงกล่องคำทำนายหลังจากไพ่เริ่มพลิก
         setTimeout(() => {
           oracleCardBadge.innerText = `${card.name} • GROUP ${selectedOracleGroup}`;
           oracleCardSubtitle.innerText = card.thaiTitle;
@@ -304,7 +301,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  // เลือกกรุ๊ปเลือดในโซน Oracle -> สับไพ่ใหม่ทันที
   oracleGroupBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       oracleGroupBtns.forEach(b => b.classList.remove('active'));
@@ -314,11 +310,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // กดปุ่มสับไพ่เสี่ยงทายใหม่
   reshuffleBtn.addEventListener('click', () => {
     setupOracleDeck();
   });
 
-  // เริ่มต้นสร้างสำรับไพ่ครั้งแรก
   setupOracleDeck();
 });

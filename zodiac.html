@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="zodiac.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="home-chat.css">
+  <link rel="stylesheet" href="account.css">
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container-nav">
+      <a class="logo" href="index.html">
+        <span>TUM9</span>
+      </a>
+      <nav>
+        <ul class="nbr">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="fortune.html">Fortune</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <ul class="nbr account-links">
+          <li><a href="login.html">Login</a></li>
+          <li><a href="register.html">Register</a></li>
+          <li><a href="profile.html">Profile</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <div class="main">
+    <div class="top">
+      <h4 class="p">✦ Zodiac Signs ✦</h4>
+      <div class="disc-container">
+        <p class="disc">Discover Your Fortune | ให้ดวงดาวนำทางคุณ</p>
+      </div>
+      <div class="zodiac-mode-switch">
+        <button id="westernBtn" class="mode-btn active" onclick="switchZodiacSystem('western')">ราศีสากล</button>
+        <button id="thaiBtn" class="mode-btn" onclick="switchZodiacSystem('thai')">ราศีไทย</button>
+      </div>
+    </div>
+    <div class="box1">
+      <button class="btn" onclick="selectCategory('Aries', this)"><img src="img-zodiac/ราศีเมษ.png" alt=""></button>
+      <button class="btn" onclick="selectCategory('Taurus', this)"><img src="img-zodiac/ราศีพฤษภ.png" alt=""></button>
+      <button class="btn" onclick="selectCategory('Gemini', this)"><img src="img-zodiac/ราศีมิถุน.png" alt=""></button>
+      <button class="btn" onclick="selectCategory('Cancer', this)"><img src="img-zodiac/ราศีกรกฎ.png" alt=""></button>
+      <button class="btn" onclick="selectCategory('Leo', this)"><img src="img-zodiac/ราศีสิงห์.png" alt=""></button>
+      <button class="btn" onclick="selectCategory('Scorpius', this)"><img src="img-zodiac/ราศีพิจิก.png" alt=""></button>
+      <button class="btn" onclick="selectCategory('Virgo', this)"><img src="img-zodiac/ราศีกันย์.png" alt=""></button>
+      <button class="btn" onclick="selectCategory('Libra', this)"><img src="img-zodiac/ราศีตุลย์.png" alt=""></button>
+      <button class="btn" onclick="selectCategory('Sagittarius', this)"><img src="img-zodiac/ราศีธนู.png" alt=""></button>
+      <button class="btn" onclick="selectCategory('Capricornus', this)"><img src="img-zodiac/ราศีมังกร.png" alt=""></button>
+      <button class="btn" onclick="selectCategory('Aquarius', this)"><img src="img-zodiac/ราศีกุมภ์.png" alt=""></button>
+      <button class="btn" onclick="selectCategory('Pisces', this)"><img src="img-zodiac/ราศีมีน.png" alt=""></button>
+    </div>
+    <div class="bt">
+      <p class="ra">ราศีที่คุณเลือก : </p>
+      <label for="" id="out"></label>
+      <button class="rs" onclick="rs()">✦ Reveal my fortune ✦</button>
+    </div>
+    <div class="pop" id="pop" style="display: none;">
+      <div class="rb">
+        <button class="close" onclick="closepop()">&times;</button>
+        <h2 class="h">ผลคำทำนายของคุณ</h2>
+        <div class="result-container">
+          <div class="result-left">
+            <label for="" id="rafi"></label>
+            <img id="rpic" src="" alt="Zodiac" class="popup-zodiac-img">
+          </div>
+          <div class="result-right">
+            <p id="rt" class="rt" style="color: white; margin: 0;"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/zodiac.js"></script>
+</body>
+
+</html>
