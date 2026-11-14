@@ -1,48 +1,6 @@
 /**
-     * ============================================================================
-     * 1. STARFIELD BACKGROUND ANIMATION (Matches subtle starry night in reference)
-     * ============================================================================
-     */
-    (function initStarfield() {
-      const canvas = document.getElementById('starfield');
-      const ctx = canvas.getContext('2d');
-      let stars = [];
-      let width, height;
-
-      function resize() {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-        const count = Math.floor((width * height) / 7500);
-        stars = Array.from({ length: count }, () => ({
-          x: Math.random() * width,
-          y: Math.random() * height,
-          r: Math.random() * 1.4 + 0.3,
-          alpha: Math.random() * 0.7 + 0.2,
-          speed: Math.random() * 0.015 + 0.004,
-          phase: Math.random() * Math.PI * 2
-        }));
-      }
-
-      function animate(t) {
-        ctx.clearRect(0, 0, width, height);
-        for (const s of stars) {
-          const twinkle = 0.5 + 0.5 * Math.sin(t * s.speed + s.phase);
-          ctx.beginPath();
-          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(233, 213, 255, ${s.alpha * twinkle})`;
-          ctx.fill();
-        }
-        requestAnimationFrame(animate);
-      }
-
-      window.addEventListener('resize', resize);
-      resize();
-      requestAnimationFrame(animate);
-    })();
-
-    /**
-     * ============================================================================
-     * 2. ASTROLOGICAL DATA & KNOWLEDGE BASE (THAI + ENGLISH)
+ * ============================================================================
+ * 1. ASTROLOGICAL DATA & KNOWLEDGE BASE (THAI + ENGLISH)
      * ============================================================================
      */
     const ZODIAC_SIGNS = [
@@ -102,7 +60,7 @@
 
     /**
      * ============================================================================
-     * 3. ASTRONOMICAL / EPHEMERIS APPROXIMATION ENGINE
+     * 2. ASTRONOMICAL / EPHEMERIS APPROXIMATION ENGINE
      * Calculates realistic ecliptic longitudes (0-360°) for Sun, Moon, Planets & Ascendant
      * ============================================================================
      */
@@ -234,7 +192,7 @@
 
     /**
      * ============================================================================
-     * 4. DYNAMIC INTERPRETATION GENERATOR (THAI)
+     * 3. DYNAMIC INTERPRETATION GENERATOR (THAI)
      * ============================================================================
      */
     function getPlanetInterpretation(p) {
@@ -263,7 +221,7 @@
 
     /**
      * ============================================================================
-     * 5. INTERACTIVE SVG NATAL WHEEL RENDERER
+     * 4. INTERACTIVE SVG NATAL WHEEL RENDERER
      * ============================================================================
      */
     let currentChart = null;
@@ -556,7 +514,7 @@
 
     /**
      * ============================================================================
-     * 6. RENDER BIG THREE, ELEMENTS, PLANET CARDS & DEEP-DIVE TABS
+     * 5. RENDER BIG THREE, ELEMENTS, PLANET CARDS & DEEP-DIVE TABS
      * ============================================================================
      */
     function renderDashboard(chart, userName, dateStr, timeStr, provinceName) {
@@ -716,7 +674,7 @@
 
     /**
      * ============================================================================
-     * 7. DEEP-DIVE PERSONALITY TABS CONTENT
+     * 6. DEEP-DIVE PERSONALITY TABS CONTENT
      * ============================================================================
      */
     function renderDeepDiveTab(tabKey) {
@@ -819,7 +777,7 @@
 
     /**
      * ============================================================================
-     * 8. UI EVENTS, TOAST & CLIPBOARD HELPERS
+     * 7. UI EVENTS, TOAST & CLIPBOARD HELPERS
      * ============================================================================
      */
     function escapeHtml(str) {
@@ -908,4 +866,3 @@
         renderDeepDiveTab(btn.dataset.tab);
       });
     });
-

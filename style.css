@@ -45,6 +45,7 @@ body {
   position: fixed;
   z-index: 0;
   inset: 1px;
+  pointer-events: none;
 }
 
 body::before {

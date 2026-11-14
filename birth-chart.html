@@ -44,8 +44,12 @@
   </script>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="birth-chart.css">
+  <link rel="stylesheet" href="home-chat.css">
 </head>
 <body class="birth-chart-page antialiased selection:bg-purple-500/30 selection:text-purple-200">
+  <div class="cosmos" aria-hidden="true">
+    <div class="cosmos-shade"></div>
+  </div>
 <header class="site-header">
   <div class="container-nav">
     <a class="logo" href="index.html"><span>TUM9</span></a>
@@ -64,12 +68,8 @@
     </nav>
   </div>
 </header>
-<!-- Twinkling Starfield & Bottom Horizon Aura -->
-  <canvas id="starfield"></canvas>
-  <div class="horizon-glow"></div>
-
   <!-- Main Wrapper -->
-  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-24">
+  <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-24">
 
     <!-- 1. TOP NAVIGATION / PILL BAR -->
     <header class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-10">
@@ -190,7 +190,7 @@
     </section>
 
     <!-- 3. INTERACTIVE NATAL CHART & RESULTS DASHBOARD -->
-    <main id="resultsDashboard" class="hidden space-y-10 transition-opacity duration-500">
+    <section id="resultsDashboard" class="hidden space-y-10 transition-opacity duration-500">
       
       <!-- Header Banner for Current Chart -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-1">
@@ -334,8 +334,8 @@
         </div>
       </section>
 
-    </main>
-  </div>
+    </section>
+  </main>
 
   <!-- Toast Notification (No alert() used) -->
   <div id="toastNotification" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">

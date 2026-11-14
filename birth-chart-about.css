@@ -1,0 +1,240 @@
+.birth-chart-about-main {
+  position: relative;
+  z-index: 1;
+  width: min(1050px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: clamp(44px, 7vw, 82px) 0 70px;
+}
+
+.birth-chart-about-hero,
+.birth-chart-about-heading {
+  text-align: center;
+}
+
+.birth-chart-about-hero {
+  max-width: 760px;
+  margin: 0 auto clamp(56px, 8vw, 84px);
+}
+
+.birth-chart-about-eyebrow {
+  color: #d7b7f0;
+  font-size: .72rem;
+  letter-spacing: .18em;
+}
+
+.birth-chart-about-hero h1 {
+  margin: 14px 0 12px;
+  background: linear-gradient(100deg, #f8edff 18%, #d2a7ff 58%, #9bdcff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 1.35;
+}
+
+.birth-chart-about-hero > p,
+.birth-chart-about-heading > p,
+.birth-chart-about-step p,
+.birth-chart-about-note > p {
+  color: #c8bddb;
+  font-size: .92rem;
+  line-height: 1.9;
+}
+
+.birth-chart-about-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 23px;
+}
+
+.birth-chart-about-primary,
+.birth-chart-about-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 11px 20px;
+  border: 1px solid #d5b5ff68;
+  border-radius: 999px;
+  color: #f5eaff;
+  background: #9a5bd522;
+  font-size: .9rem;
+  transition: background .2s ease, border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+
+.birth-chart-about-primary:hover,
+.birth-chart-about-secondary:hover {
+  transform: translateY(-2px);
+  border-color: #e4c4ff;
+  background: #9a5bd54a;
+  box-shadow: 0 0 22px #a35cf348;
+}
+
+.birth-chart-about-primary span,
+.birth-chart-about-secondary span {
+  color: #e2bdff;
+}
+
+.birth-chart-about-heading h2,
+.birth-chart-about-note h2 {
+  margin-top: 8px;
+  color: #f7efff;
+  font-size: clamp(1.45rem, 3.2vw, 2rem);
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.birth-chart-about-heading > p {
+  margin-top: 5px;
+}
+
+.birth-chart-about-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 26px;
+}
+
+.birth-chart-about-card,
+.birth-chart-about-step,
+.birth-chart-about-note {
+  border: 1px solid #d5b5ff30;
+  border-radius: 18px;
+  background: linear-gradient(155deg, #21152fdd, #110b1cf2);
+  box-shadow: 0 16px 38px #00000038, inset 0 1px #ffffff08;
+}
+
+.birth-chart-about-card {
+  min-height: 200px;
+  padding: 24px;
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+
+.birth-chart-about-card:hover {
+  transform: translateY(-4px);
+  border-color: #d5b5ff8c;
+  box-shadow: 0 20px 38px #00000050, 0 0 20px #a35cf326;
+}
+
+.birth-chart-about-symbol {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 1px solid #d5b5ff66;
+  border-radius: 50%;
+  color: #e2bdff;
+  background: #9a5bd522;
+  font-size: 1.2rem;
+}
+
+.birth-chart-about-card h3,
+.birth-chart-about-step h3 {
+  margin-top: 15px;
+  color: #f7efff;
+  font-size: 1.02rem;
+  font-weight: 500;
+}
+
+.birth-chart-about-card p {
+  margin-top: 8px;
+  color: #c8bddb;
+  font-size: .84rem;
+  line-height: 1.85;
+}
+
+.birth-chart-about-steps {
+  display: grid;
+  gap: 14px;
+  margin-top: clamp(48px, 7vw, 74px);
+  scroll-margin-top: 28px;
+}
+
+.birth-chart-about-steps .birth-chart-about-heading {
+  margin-bottom: 10px;
+}
+
+.birth-chart-about-step {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  align-items: start;
+  gap: 20px;
+  padding: clamp(20px, 4vw, 30px);
+  background: #170e25cc;
+}
+
+.birth-chart-about-step-number {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border: 1px solid #d5b5ff55;
+  border-radius: 14px;
+  color: #e2bdff;
+  background: radial-gradient(circle at center, #9a5bd533, #10081b99);
+  font-size: .85rem;
+  letter-spacing: .08em;
+}
+
+.birth-chart-about-step h3 {
+  margin-top: 2px;
+}
+
+.birth-chart-about-step p {
+  margin-top: 7px;
+  font-size: .86rem;
+}
+
+.birth-chart-about-note {
+  margin-top: clamp(42px, 7vw, 70px);
+  padding: clamp(24px, 5vw, 40px);
+  border-color: #d5b5ff40;
+  text-align: center;
+}
+
+.birth-chart-about-note > p {
+  max-width: 760px;
+  margin: 8px auto 0;
+}
+
+.birth-chart-about-note .birth-chart-about-primary {
+  margin-top: 18px;
+}
+
+@media (max-width: 640px) {
+  .birth-chart-about-main {
+    width: calc(100% - 30px);
+    padding-top: 38px;
+  }
+
+  .birth-chart-about-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .birth-chart-about-card {
+    min-height: 0;
+    padding: 20px;
+  }
+
+  .birth-chart-about-step {
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: 14px;
+    padding: 18px;
+  }
+
+  .birth-chart-about-step-number {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .birth-chart-about-primary,
+  .birth-chart-about-secondary,
+  .birth-chart-about-card {
+    transition: none;
+  }
+}
