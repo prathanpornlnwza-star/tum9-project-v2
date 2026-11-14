@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ความหมายไพ่ทาโรต์ | TUM9</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="card-about.css">
+  <link rel="stylesheet" href="home-chat.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container-nav">
+      <a class="logo" href="index.html">
+        <span>TUM9</span>
+      </a>
+      <nav>
+        <ul class="nbr">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="fortune.html">Fortune</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <ul class="nbr account-links">
+          <li><a href="login.html">Login</a></li>
+          <li><a href="register.html">Register</a></li>
+          <li><a href="profile.html">Profile</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="card-about-main">
+    <section class="card-about-intro" aria-labelledby="card-about-title">
+      <span class="card-about-eyebrow">TUM . TAROT · THE COMPLETE DECK</span>
+      <h1 id="card-about-title">ความหมายของไพ่ทั้ง 78 ใบ</h1>
+      <p>สำรวจเรื่องราวและสัญลักษณ์ของไพ่แต่ละใบ พร้อมภาพไพ่และคำอธิบายเฉพาะใบ</p>
+      <a class="card-about-back" href="taro.html">กลับไปเลือกหัวข้อทำนาย <span aria-hidden="true">↗</span></a>
+    </section>
+
+    <section class="card-about-library" aria-labelledby="card-library-title">
+      <div class="card-about-heading">
+        <div>
+          <span class="card-about-eyebrow">EXPLORE THE DECK</span>
+          <h2 id="card-library-title">สำรับไพ่ทาโรต์</h2>
+        </div>
+        <p class="card-about-count" id="card-count" aria-live="polite">กำลังแสดงไพ่ 78 ใบ</p>
+      </div>
+
+      <label class="card-about-search">
+        <span>ค้นหาชื่อไพ่ คำสำคัญ หรือชื่อตัวละคร</span>
+        <input id="card-search" type="search" placeholder="เช่น The Fool, ความรัก, Invoker" autocomplete="off">
+      </label>
+
+      <div class="card-about-filters" role="group" aria-label="กรองตามหมวดไพ่">
+        <button type="button" class="card-filter is-active" data-filter="all" aria-pressed="true">ทั้งหมด <span>78</span></button>
+        <button type="button" class="card-filter" data-filter="major" aria-pressed="false">Major Arcana <span>22</span></button>
+        <button type="button" class="card-filter" data-filter="wands" aria-pressed="false">ไม้เท้า <span>14</span></button>
+        <button type="button" class="card-filter" data-filter="swords" aria-pressed="false">ดาบ <span>14</span></button>
+        <button type="button" class="card-filter" data-filter="cups" aria-pressed="false">ถ้วย <span>14</span></button>
+        <button type="button" class="card-filter" data-filter="pentacles" aria-pressed="false">เหรียญ <span>14</span></button>
+      </div>
+
+      <div class="card-about-grid" id="card-grid"></div>
+      <p class="card-about-empty" id="card-empty" hidden>ไม่พบไพ่ที่ตรงกับคำค้นหา</p>
+    </section>
+  </main>
+
+  <script src="tarotdata.js"></script>
+  <script src="card-about-data.js"></script>
+  <script src="card-about.js"></script>
+  <script src="home-chat.js"></script>
+</body>
+</html>

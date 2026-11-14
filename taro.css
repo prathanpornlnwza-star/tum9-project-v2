@@ -83,6 +83,24 @@ body::before {
   margin-bottom: 2rem;
 }
 
+.card-guide-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: -1.25rem;
+  margin-bottom: 1.7rem;
+  color: #e2bdff;
+  font-size: .88rem;
+  text-decoration: underline;
+  text-decoration-color: rgba(226, 189, 255, .45);
+  text-underline-offset: 4px;
+}
+
+.card-guide-link:hover {
+  color: #ffffff;
+  text-decoration-color: currentColor;
+}
+
 /* ตาราง 3 คอลัมน์ x 3 แถว สำหรับ 9 หมวดหมู่ */
 .category-grid {
   display: grid;
