@@ -1,63 +1,349 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="th" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Birth Chart | TUM9</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Prompt"', '"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Plus Jakarta Sans"', '"Prompt"', 'sans-serif'],
+          },
+          colors: {
+            cosmic: {
+              bg: '#080412',
+              deep: '#0f0722',
+              card: 'rgba(22, 13, 46, 0.58)',
+              border: 'rgba(168, 85, 247, 0.25)',
+              glow: '#7c3aed',
+              lavender: '#c4b5fd',
+            }
+          },
+          animation: {
+            'pulse-slow': 'pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'spin-very-slow': 'spin 120s linear infinite',
+            'float': 'float 6s ease-in-out infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-6px)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="birth-chart.css">
-  <link rel="stylesheet" href="home-chat.css">
 </head>
-<body class="birth-chart-page">
-  <div class="cosmos" aria-hidden="true">
-    <div class="cosmos-shade"></div>
-  </div>
-  <header class="site-header">
-    <div class="container-nav">
-      <a class="logo" href="index.html"><span>TUM9</span></a>
-      <nav aria-label="Main navigation">
-        <ul class="nbr">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="fortune.html" aria-current="page">Fortune</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-        <ul class="nbr account-links">
+<body class="birth-chart-page antialiased selection:bg-purple-500/30 selection:text-purple-200">
+<header class="site-header">
+  <div class="container-nav">
+    <a class="logo" href="index.html"><span>TUM9</span></a>
+    <nav aria-label="Main navigation">
+      <ul class="nbr">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="fortune.html" aria-current="page">Fortune</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <ul class="nbr account-links">
           <li><a href="login.html">Login</a></li>
           <li><a href="register.html">Register</a></li>
           <li><a href="profile.html">Profile</a></li>
-        </ul>
-      </nav>
+      </ul>
+    </nav>
+  </div>
+</header>
+<!-- Twinkling Starfield & Bottom Horizon Aura -->
+  <canvas id="starfield"></canvas>
+  <div class="horizon-glow"></div>
+
+  <!-- Main Wrapper -->
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-24">
+
+    <!-- 1. TOP NAVIGATION / PILL BAR -->
+    <header class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-10">
+      <!-- Left Back Pill -->
+      <a href="fortune.html"
+         class="cosmic-pill rounded-full px-5 py-2.5 text-xs sm:text-sm text-purple-200/90 hover:text-white flex items-center gap-2 self-start sm:self-auto">
+        <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+        </svg>
+        <span>กลับหน้าหลัก</span>
+      </a>
+
+      <!-- Center Title Pill (Matches Screenshot Top Pill) -->
+      <div class="cosmic-pill rounded-full px-6 py-2.5 text-xs sm:text-sm text-purple-100/95 flex items-center gap-2.5 shadow-lg">
+        <span class="w-2 h-2 rounded-full bg-purple-400 animate-ping"></span>
+        <span class="font-medium tracking-wide">Birth Chart • เจาะลึกตัวตนผ่านข้อมูลวันเวลาเกิด</span>
+        <svg class="w-3.5 h-3.5 text-purple-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+        </svg>
+      </div>
+
+      <!-- Right Info / Share Pill -->
+      <button onclick="copyChartSummary()" 
+              class="cosmic-pill rounded-full px-4 py-2.5 text-xs sm:text-sm text-purple-200/90 hover:text-white hidden md:flex items-center gap-2">
+        <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
+        </svg>
+        <span>คัดลอกสรุปดวงดาว</span>
+      </button>
+    </header>
+
+    <!-- 2. HERO & BIRTH DATA INPUT SECTION -->
+    <section class="text-center max-w-3xl mx-auto mb-10">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-purple-500/10 border border-purple-400/20 text-purple-300 text-xs mb-4">
+        <span>✦ ASTROLOGY &amp; NATAL BLUEPRINT ✦</span>
+      </div>
+      <h1 class="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-3 drop-shadow-[0_0_25px_rgba(168,85,247,0.35)]">
+        Birth Chart
+      </h1>
+      <p class="text-purple-200/80 text-base sm:text-lg font-light max-w-xl mx-auto">
+        ผูกดวงชะตาและเจาะลึกแผนที่ดวงดาวประจำตัวคุณ ค้นพบรหัสลับแห่งตัวตน อารมณ์ และเส้นทางชีวิตจากตำแหน่งดวงดาว ณ วินาทีที่คุณลืมตาดูโลก
+      </p>
+    </section>
+
+    <!-- Birth Data Form Card -->
+    <section class="cosmic-card rounded-3xl p-6 sm:p-8 mb-12 relative overflow-hidden">
+      <!-- Subtle Cosmic Nebula Accent inside card -->
+      <div class="absolute -top-24 -right-24 w-64 h-64 bg-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-indigo-600/15 rounded-full blur-3xl pointer-events-none"></div>
+
+      <form id="birthForm" class="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-5 items-end">
+        <!-- Name -->
+        <div class="lg:col-span-3">
+          <label for="userName" class="block text-xs font-medium text-purple-200/90 mb-2">
+            ชื่อเล่น / นามแฝง <span class="text-purple-400/60">(ไม่บังคับ)</span>
+          </label>
+          <input type="text" id="userName" placeholder="ระบุชื่อของคุณ..."
+                 class="cosmic-input w-full rounded-2xl px-4 py-3 text-sm placeholder-purple-300/30" />
+        </div>
+
+        <!-- Date of Birth -->
+        <div class="lg:col-span-3">
+          <label for="birthDate" class="block text-xs font-medium text-purple-200/90 mb-2">
+            วัน / เดือน / ปีเกิด (ค.ศ.)
+          </label>
+          <input type="date" id="birthDate" required
+                 class="cosmic-input w-full rounded-2xl px-4 py-3 text-sm" />
+        </div>
+
+        <!-- Time of Birth -->
+        <div class="lg:col-span-3">
+          <div class="flex items-center justify-between mb-2">
+            <label for="birthTime" class="text-xs font-medium text-purple-200/90">เวลาเกิด</label>
+            <label class="inline-flex items-center gap-1.5 text-[11px] text-purple-300/80 cursor-pointer select-none">
+              <input type="checkbox" id="unknownTime" class="rounded border-purple-500/40 bg-purple-950/60 text-purple-500 focus:ring-purple-500" />
+              <span>ไม่ทราบเวลาเกิด</span>
+            </label>
+          </div>
+          <input type="time" id="birthTime" required
+                 class="cosmic-input w-full rounded-2xl px-4 py-3 text-sm disabled:opacity-40 disabled:cursor-not-allowed" />
+        </div>
+
+        <!-- Birth Location / Province -->
+        <div class="lg:col-span-3">
+          <label for="birthProvince" class="block text-xs font-medium text-purple-200/90 mb-2">
+            สถานที่เกิด / จังหวัด
+          </label>
+          <select id="birthProvince" required class="cosmic-input w-full rounded-2xl px-4 py-3 text-sm">
+            <option value="" selected disabled>เลือกจังหวัด</option>
+            <option value="18.7883,98.9853">เชียงใหม่ (Chiang Mai)</option>
+            <option value="16.4322,102.8236">ขอนแก่น (Khon Kaen)</option>
+            <option value="7.8804,98.3923">ภูเก็ต (Phuket)</option>
+            <option value="13.3611,100.9847">ชลบุรี (Chon Buri)</option>
+            <option value="14.9799,102.0978">นครราชสีมา (Nakhon Ratchasima)</option>
+            <option value="7.0086,100.4747">สงขลา / หาดใหญ่ (Songkhla)</option>
+            <option value="19.9105,99.8406">เชียงราย (Chiang Rai)</option>
+            <option value="17.4138,102.7872">อุดรธานี (Udon Thani)</option>
+            <option value="15.2448,104.8473">อุบลราชธานี (Ubon Ratchathani)</option>
+            <option value="9.1382,99.3217">สุราษฎร์ธานี (Surat Thani)</option>
+            <option value="14.3532,100.5684">พระนครศรีอยุธยา (Ayutthaya)</option>
+          </select>
+        </div>
+
+        <!-- Submit Button Row -->
+        <div class="md:col-span-2 lg:col-span-12 flex flex-col sm:flex-row items-center justify-between gap-4 pt-2 border-t border-purple-500/15">
+          <p class="text-xs text-purple-300/70 flex items-center gap-2">
+            <span class="text-purple-400">✦</span>
+            <span>ระบบคำนวณตำแหน่งดาวเคราะห์ตามหลักโหราศาสตร์สากล (Tropical Zodiac &amp; Placidus/Whole Sign Houses)</span>
+          </p>
+          <button type="submit" class="btn-cosmic-primary w-full sm:w-auto rounded-full px-8 py-3.5 text-sm font-semibold text-white flex items-center justify-center gap-2.5 cursor-pointer">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
+            </svg>
+            <span>คำนวณแผนที่ดวงดาว (Calculate Birth Chart)</span>
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- 3. INTERACTIVE NATAL CHART & RESULTS DASHBOARD -->
+    <main id="resultsDashboard" class="hidden space-y-10 transition-opacity duration-500">
+      
+      <!-- Header Banner for Current Chart -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-1">
+        <div>
+          <span class="text-xs uppercase tracking-widest text-purple-400 font-semibold">NATAL CHART REPORT</span>
+          <h2 id="chartOwnerHeader" class="text-2xl sm:text-3xl font-bold text-white mt-0.5">
+            แผนที่ดวงดาวของ <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-fuchsia-200 to-indigo-300">คุณอารยา</span>
+          </h2>
+        </div>
+        <div id="chartMetaBadge" class="cosmic-pill rounded-full px-4 py-2 text-xs text-purple-200/90 self-start sm:self-auto">
+          18 ส.ค. 1998 • เวลา 09:30 น. • กรุงเทพมหานคร
+        </div>
+      </div>
+
+      <!-- TOP GRID: Interactive SVG Natal Wheel + The Big Three -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- LEFT (7 Cols): Interactive SVG Natal Wheel -->
+        <div class="lg:col-span-7 cosmic-card rounded-3xl p-5 sm:p-7 relative flex flex-col items-center">
+          <div class="w-full flex items-center justify-between mb-4">
+            <div>
+              <h3 class="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-fuchsia-400"></span>
+                แผนภูมิดวงดาว 12 ราศี &amp; 12 เรือนชะตา
+              </h3>
+              <p class="text-xs text-purple-300/75">คลิกหรือชี้ที่สัญลักษณ์ดาวเคราะห์บนวงล้อเพื่อดูความหมายเชิงลึก</p>
+            </div>
+            <span class="text-[11px] px-3 py-1 rounded-full bg-purple-950/80 border border-purple-500/30 text-purple-300">
+              Interactive Wheel
+            </span>
+          </div>
+
+          <!-- Responsive SVG Container -->
+          <div class="relative w-full max-w-[490px] aspect-square my-2 flex items-center justify-center">
+            <!-- Ambient Halo behind wheel -->
+            <div class="absolute inset-8 rounded-full bg-purple-600/15 blur-2xl pointer-events-none"></div>
+            <svg id="natalWheelSvg" viewBox="0 0 520 520" class="w-full h-full overflow-visible select-none"></svg>
+          </div>
+
+          <!-- Interactive Planet Inspector Box (Updates on Hover/Click) -->
+          <div id="planetInspector" class="w-full mt-4 rounded-2xl bg-[#0b061a]/90 border border-purple-500/30 p-4 transition-all">
+            <div class="flex items-start gap-3.5">
+              <div id="inspectorSymbol" class="w-11 h-11 rounded-xl bg-purple-500/20 border border-purple-400/30 flex items-center justify-center text-xl text-purple-200 shrink-0">
+                ☉
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex flex-wrap items-center gap-2">
+                  <h4 id="inspectorTitle" class="text-sm sm:text-base font-semibold text-white">
+                    อาทิตย์ (Sun) ในราศีสิงห์ (Leo)
+                  </h4>
+                  <span id="inspectorHouse" class="text-[11px] px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-200 border border-purple-400/25">
+                    เรือนที่ 11 • 25°14'
+                  </span>
+                </div>
+                <p id="inspectorDesc" class="text-xs sm:text-sm text-purple-200/80 mt-1 leading-relaxed">
+                  พลังชีวิตที่เปล่งประกาย มีความเป็นผู้นำโดยธรรมชาติ รักศักดิ์ศรี อบอุ่นใจกว้าง และโดดเด่นเมื่อได้สร้างสรรค์สิ่งใหม่ร่วมกับผู้คน
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT (5 Cols): The Big Three Highlight Cards (Arch-styled accent) -->
+        <div class="lg:col-span-5 space-y-5">
+          <div class="flex items-center justify-between px-1">
+            <h3 class="text-base sm:text-lg font-semibold text-white">3 เสาหลักแห่งตัวตน (The Big Three)</h3>
+            <span class="text-xs text-purple-300/70">แกนหลักของดวงชะตา</span>
+          </div>
+
+          <!-- Big Three Cards Container -->
+          <div id="bigThreeContainer" class="space-y-4">
+            <!-- Populated dynamically by JS -->
+          </div>
+
+          <!-- Element & Modality Balance Card -->
+          <div class="cosmic-card rounded-3xl p-5 sm:p-6">
+            <h4 class="text-sm font-semibold text-white mb-1 flex items-center justify-between">
+              <span>สมดุลธาตุประจำตัว (Elemental Balance)</span>
+              <span id="dominantElementBadge" class="text-xs font-normal text-purple-300">เด่นธาตุไฟ 🔥</span>
+            </h4>
+            <p class="text-xs text-purple-300/70 mb-4">สัดส่วนพลังงานจากตำแหน่งดาวเคราะห์ทั้ง 8 ดวงหลัก</p>
+            
+            <div id="elementsContainer" class="space-y-3">
+              <!-- Populated dynamically -->
+            </div>
+
+            <!-- Modality Pills -->
+            <div id="modalityContainer" class="grid grid-cols-3 gap-2 mt-5 pt-4 border-t border-purple-500/15 text-center">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MIDDLE SECTION: Complete Planetary Placements Grid -->
+      <section class="cosmic-card rounded-3xl p-6 sm:p-8">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
+          <div>
+            <h3 class="text-lg sm:text-xl font-bold text-white">ตำแหน่งดวงดาวและเรือนชะตา (Planetary Placements)</h3>
+            <p class="text-xs sm:text-sm text-purple-300/75">รายละเอียดดาวเคราะห์สำคัญทั้ง 8 ดวง พร้อมองศา ราศี และความหมายเฉพาะบุคคล</p>
+          </div>
+          <span class="text-xs text-purple-300/80 bg-purple-500/10 border border-purple-400/20 px-3.5 py-1.5 rounded-full self-start">
+            คลิกที่การ์ดเพื่อไฮไลต์บนแผนภูมิ
+          </span>
+        </div>
+
+        <div id="planetsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Populated dynamically -->
+        </div>
+      </section>
+
+      <!-- BOTTOM SECTION: Deep-Dive Personality Tabs -->
+      <section class="cosmic-card rounded-3xl p-6 sm:p-8 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-80 h-80 bg-fuchsia-600/10 rounded-full blur-3xl pointer-events-none"></div>
+        
+        <div class="relative z-10">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+            <div>
+              <span class="text-xs font-semibold tracking-wider text-purple-400 uppercase">DEEP-DIVE INTERPRETATION</span>
+              <h3 class="text-xl sm:text-2xl font-bold text-white mt-0.5">คำทำนายเจาะลึกเฉพาะบุคคล</h3>
+            </div>
+
+            <!-- Interactive Tab Pills -->
+            <div class="flex flex-wrap gap-2 bg-[#090415]/80 p-1.5 rounded-2xl border border-purple-500/20">
+              <button type="button" data-tab="identity" class="tab-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all bg-purple-600 text-white shadow-lg shadow-purple-600/30">
+                ✦ ภาพรวมตัวตน (Identity)
+              </button>
+              <button type="button" data-tab="love" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all text-purple-200/80 hover:text-white">
+                ♥ ความรักและความสัมพันธ์
+              </button>
+              <button type="button" data-tab="career" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all text-purple-200/80 hover:text-white">
+                ❖ การงานและศักยภาพ
+              </button>
+            </div>
+          </div>
+
+          <!-- Tab Content Display -->
+          <div id="tabContentArea" class="rounded-2xl bg-[#0a0518]/75 border border-purple-500/20 p-6 sm:p-7">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Toast Notification (No alert() used) -->
+  <div id="toastNotification" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="cosmic-pill rounded-full px-5 py-3 text-xs sm:text-sm text-white flex items-center gap-2.5 shadow-2xl border-purple-400/50">
+      <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+      <span id="toastMessage">ข้อความแจ้งเตือน</span>
     </div>
-  </header>
-
-  <main class="birth-chart-main">
-    <section class="birth-chart-hero" aria-labelledby="birth-chart-title">
-      <span class="reading-eyebrow"><span aria-hidden="true">✦</span> YOUR CELESTIAL BLUEPRINT</span>
-      <h1 id="birth-chart-title">Birth Chart</h1>
-      <p>แผนที่ท้องฟ้าในช่วงเวลาที่คุณถือกำเนิด ชวนให้สำรวจตัวตนและจังหวะชีวิตผ่านตำแหน่งของดวงดาว</p>
-    </section>
-
-    <section class="birth-chart-content" aria-label="ข้อมูลเกี่ยวกับ Birth Chart">
-      <article class="birth-chart-card birth-chart-intro">
-        <span class="birth-chart-symbol" aria-hidden="true">☼</span>
-        <h2>ดวงดาวเล่าเรื่องอะไรเกี่ยวกับคุณ?</h2>
-        <p>Birth Chart หรือแผนผังดวงกำเนิด เปรียบเสมือนภาพถ่ายตำแหน่งดาว ณ วัน เวลา และสถานที่เกิด ใช้เป็นอีกมุมมองหนึ่งในการทำความเข้าใจบุคลิก จุดแข็ง และสิ่งที่ให้ความสำคัญในชีวิต</p>
-        <p class="birth-chart-note">การอ่านดวงเป็นแนวทางเพื่อความบันเทิงและการทบทวนตัวเอง ไม่ใช่ข้อสรุปตายตัวเกี่ยวกับชีวิต</p>
-      </article>
-
-      <article class="birth-chart-card birth-chart-details">
-        <span class="reading-eyebrow"><span aria-hidden="true">✧</span> WHAT YOU'LL NEED</span>
-        <h2>เตรียมข้อมูลก่อนอ่านดวง</h2>
-        <ul>
-          <li><span aria-hidden="true">01</span><div><strong>วัน / เดือน / ปีเกิด</strong><p>ระบุวันเกิดให้ครบถ้วน</p></div></li>
-          <li><span aria-hidden="true">02</span><div><strong>เวลาเกิด</strong><p>เวลาเกิดที่ใกล้เคียงจริงช่วยให้แผนผังละเอียดขึ้น</p></div></li>
-          <li><span aria-hidden="true">03</span><div><strong>เมืองและประเทศที่เกิด</strong><p>ใช้ประกอบการระบุตำแหน่งท้องฟ้า</p></div></li>
-        </ul>
-        <a class="birth-chart-contact" href="contact.html#birthDate">สอบถามการอ่าน Birth Chart <span aria-hidden="true">→</span></a>
-      </article>
-    </section>
-  </main>
-  <script src="home-chat.js"></script>
+  </div>
+  <script src="birth-chart.js"></script>
 </body>
 </html>
