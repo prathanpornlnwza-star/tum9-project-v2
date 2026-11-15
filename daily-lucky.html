@@ -4,14 +4,55 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Daily Lucky | TUM9</title>
+  <!-- นำเข้าฟอนต์ Prompt เพื่อให้สอดคล้องกับทั้งโปรเจ็กต์ -->
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="daily-lucky.css">
   <link rel="stylesheet" href="home-chat.css">
+
+  <!-- ========== การตั้งค่าภาพพื้นหลัง (Background) ในโค้ดโดยตรง ========== -->
+  <style>
+    /* 1. ตั้งค่ากล่องพื้นหลังหลักให้เต็มหน้าจอและดึงรูป Homepage.jpg มาแสดง */
+    #cosmosBg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      background-color: #0d0718;
+      background-image: url('Homepage.jpg');
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      transition: background-image 0.5s ease-in-out;
+    }
+
+    /* 2. เมื่อสลับไปโหมดดวงประจำปี (data-bg-mode="about") ให้เปลี่ยนเป็นรูป about.jpg */
+    body[data-bg-mode="about"] #cosmosBg {
+      background-image: url('about.jpg');
+    }
+
+    /* 3. เลเยอร์ฟิลเตอร์สีม่วงเข้มทับบนรูป เพื่อให้ตัวหนังสือสีพาสเทลอ่านง่ายขึ้น */
+    #cosmosBg .cosmos-shade {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(14, 8, 26, 0.45) 0%,
+        rgba(22, 11, 40, 0.65) 55%,
+        rgba(12, 7, 22, 0.90) 100%
+      );
+    }
+  </style>
 </head>
-<body class="daily-lucky-page">
-  <div class="cosmos" aria-hidden="true">
+<body class="daily-lucky-page" data-bg-mode="homepage">
+  <!-- ========== พื้นหลังจักรวาล ========== -->
+  <div class="cosmos" id="cosmosBg" aria-hidden="true">
     <div class="cosmos-shade"></div>
   </div>
+
+  <!-- ========== เมนูด้านบน (Navbar มาตรฐานของ TUM9) ========== -->
   <header class="site-header">
     <div class="container-nav">
       <a class="logo" href="index.html"><span>TUM9</span></a>
@@ -31,14 +72,105 @@
     </div>
   </header>
 
+  <!-- ========== เนื้อหาหลัก: ดวงประจำวัน / เดือน / ปี ========== -->
   <main class="daily-main">
     <section class="daily-hero" aria-labelledby="daily-title">
-      <span class="daily-eyebrow"><span aria-hidden="true">✦</span> YOUR DAILY COSMIC NOTE</span>
+      <span class="daily-eyebrow">
+        <span aria-hidden="true">✦</span>
+        <span id="eyebrowText">YOUR DAILY COSMIC NOTE</span>
+      </span>
+      
+      <!-- หัวข้อหลัก (เอาคำว่า • ราศีเมษ ออกเรียบร้อย) -->
       <h1 id="daily-title">Daily Lucky</h1>
       <p class="daily-date" id="dailyDate" aria-live="polite"></p>
-      <p class="daily-message" id="dailyMessage" aria-live="polite">กำลังเปิดคำทำนายประจำวัน...</p>
+
+      <!-- ปุ่มสลับโหมด: ดวงประจำวัน / ดวงประจำเดือน / ดวงประจำปี -->
+      <div class="cosmic-tabs" role="tablist" aria-label="เลือกช่วงเวลาดูดวง">
+        <button class="cosmic-tab is-active" type="button" data-period="daily">ดวงประจำวัน</button>
+        <button class="cosmic-tab" type="button" data-period="monthly">ดวงประจำเดือน</button>
+        <button class="cosmic-tab" type="button" data-period="yearly">ดวงประจำปี</button>
+      </div>
+
+      <!-- ========== ส่วนควบคุม: แสดงเฉพาะตัวเลือกตามโหมดที่กด ========== -->
+      <div class="cosmic-controls">
+        
+        <!-- 1. โหมดดวงประจำวัน: ขึ้นเฉพาะเลือกวัน -->
+        <label for="daySelect" class="sr-only">เลือกวัน</label>
+        <select id="daySelect" class="cosmic-select">
+          <option value="อาทิตย์">วันอาทิตย์</option>
+          <option value="จันทร์">วันจันทร์</option>
+          <option value="อังคาร">วันอังคาร</option>
+          <option value="พุธ">วันพุธ</option>
+          <option value="พฤหัสบดี">วันพฤหัสบดี</option>
+          <option value="ศุกร์">วันศุกร์</option>
+          <option value="เสาร์">วันเสาร์</option>
+        </select>
+
+        <!-- 2. โหมดดวงประจำเดือน: ขึ้นเฉพาะเลือกเดือน -->
+        <label for="monthSelect" class="sr-only">เลือกเดือน</label>
+        <select id="monthSelect" class="cosmic-select" style="display: none;">
+          <option value="มกราคม">เดือนมกราคม (1 ม.ค. - 31 ม.ค.)</option>
+          <option value="กุมภาพันธ์">เดือนกุมภาพันธ์ (1 ก.พ. - 28 ก.พ.)</option>
+          <option value="มีนาคม">เดือนมีนาคม (1 มี.ค. - 31 มี.ค.)</option>
+          <option value="เมษายน">เดือนเมษายน (1 เม.ย. - 30 เม.ย.)</option>
+          <option value="พฤษภาคม">เดือนพฤษภาคม (1 พ.ค. - 31 พ.ค.)</option>
+          <option value="มิถุนายน">เดือนมิถุนายน (1 มิ.ย. - 30 มิ.ย.)</option>
+          <option value="กรกฎาคม">เดือนกรกฎาคม (1 ก.ค. - 31 ก.ค.)</option>
+          <option value="สิงหาคม">เดือนสิงหาคม (1 ส.ค. - 31 ส.ค.)</option>
+          <option value="กันยายน">เดือนกันยายน (1 ก.ย. - 30 ก.ย.)</option>
+          <option value="ตุลาคม">เดือนตุลาคม (1 ต.ค. - 31 ต.ค.)</option>
+          <option value="พฤศจิกายน">เดือนพฤศจิกายน (1 พ.ย. - 30 พ.ย.)</option>
+          <option value="ธันวาคม">เดือนธันวาคม (1 ธ.ค. - 31 ธ.ค.)</option>
+        </select>
+
+        <!-- 3. โหมดดวงประจำปี: ขึ้นเฉพาะเลือกปี 5 ปี -->
+        <label for="yearSelect" class="sr-only">เลือกปี</label>
+        <select id="yearSelect" class="cosmic-select" style="display: none;">
+          <option value="2569">ปี พ.ศ. 2569 (2026)</option>
+          <option value="2570">ปี พ.ศ. 2570 (2027)</option>
+          <option value="2571">ปี พ.ศ. 2571 (2028)</option>
+          <option value="2572">ปี พ.ศ. 2572 (2029)</option>
+          <option value="2573">ปี พ.ศ. 2573 (2030)</option>
+          <option value="2574">ปี พ.ศ. 2574 (2031)</option>
+        </select>
+
+        <button class="cosmic-predict-btn" id="predictBtn" type="button">เปิดคำทำนาย ✦</button>
+      </div>
+
+      <!-- คำทำนายภาพรวมแบบคล้องจอง -->
+      <p class="daily-message" id="dailyMessage" aria-live="polite">
+        "ค่อยๆ ก้าวตามจังหวะของดวงดาว ไม่ต้องก้าวเร็วไปให้เหนื่อยล้า ความสม่ำเสมอจะนำพา ให้ถึงคราประสบผลดั่งตั้งใจ"
+      </p>
     </section>
 
+    <!-- การ์ดเจาะลึก 3 ด้าน -->
+    <section class="daily-aspects" aria-label="คำทำนายเจาะลึก 3 ด้าน">
+      <article class="daily-aspect-card">
+        <div class="aspect-header">
+          <img src="graduation-hat.png" alt="" class="aspect-icon" aria-hidden="true">
+          <h2>การงานและการเรียน</h2>
+        </div>
+        <p id="workReading">—</p>
+      </article>
+
+      <article class="daily-aspect-card">
+        <div class="aspect-header">
+          <img src="diagram.png" alt="" class="aspect-icon" aria-hidden="true">
+          <h2>ความก้าวหน้าและการเงิน</h2>
+        </div>
+        <p id="moneyReading">—</p>
+      </article>
+
+      <article class="daily-aspect-card">
+        <div class="aspect-header">
+          <span class="aspect-symbol" aria-hidden="true">💖</span>
+          <h2>ความรักและความสัมพันธ์</h2>
+        </div>
+        <p id="loveReading">—</p>
+      </article>
+    </section>
+
+    <!-- การ์ดสิ่งนำโชค 3 ช่อง -->
     <section class="daily-highlights" aria-label="สิ่งนำโชคประจำวัน">
       <article class="daily-highlight">
         <span aria-hidden="true">✧</span>
@@ -58,9 +190,126 @@
     </section>
 
     <p class="daily-disclaimer">คำทำนายนี้จัดทำเพื่อความบันเทิงและเป็นแรงบันดาลใจในการใช้ชีวิตประจำวัน</p>
-    <a class="daily-back-link" href="fortune.html">กลับไปสำรวจศาสตร์พยากรณ์ <span aria-hidden="true">→</span></a>
+    <a class="daily-back-link" href="/fortune.html">กลับไปสำรวจศาสตร์พยากรณ์ <span aria-hidden="true">→</span></a>
   </main>
-  <script src="daily-lucky.js"></script>
+
+  <!-- หมายเหตุ: ปิดการใช้งาน daily-lucky.js ตัวเก่าชั่วคราว เพราะไฟล์นั้นเป็นตัวสั่งเติมคำว่า "• ราศีเมษ" -->
+  <!-- <script src="daily-lucky.js"></script> -->
   <script src="home-chat.js"></script>
+
+  <!-- ========== สคริปต์ควบคุมการทำงานทั้งหมด (ไม่มีคำว่าราศีเมษ) ========== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. อ้างอิง Element จากหน้าเว็บ
+      const dailyTitle = document.getElementById('daily-title');
+      const dailyDate = document.getElementById('dailyDate');
+      const eyebrowText = document.getElementById('eyebrowText');
+      const tabs = document.querySelectorAll('.cosmic-tab');
+      const daySelect = document.getElementById('daySelect');
+      const monthSelect = document.getElementById('monthSelect');
+      const yearSelect = document.getElementById('yearSelect');
+      const predictBtn = document.getElementById('predictBtn');
+
+      // Element แสดงคำทำนาย
+      const dailyMessage = document.getElementById('dailyMessage');
+      const workReading = document.getElementById('workReading');
+      const moneyReading = document.getElementById('moneyReading');
+      const loveReading = document.getElementById('loveReading');
+      const luckyNumber = document.getElementById('luckyNumber');
+      const luckyColor = document.getElementById('luckyColor');
+      const luckyFocus = document.getElementById('luckyFocus');
+
+      // 2. แสดงวันที่ปัจจุบันแบบภาษาไทย (เช่น วันอาทิตย์ที่ 15 พฤศจิกายน 2569)
+      const now = new Date();
+      dailyDate.textContent = now.toLocaleDateString('th-TH', {
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      });
+
+      // ตั้งค่าหัวข้อหลักให้เป็น "Daily Lucky" เฉยๆ (ล็อกไว้ไม่ให้มีคำว่า • ราศีเมษ)
+      dailyTitle.textContent = 'Daily Lucky';
+
+      let currentPeriod = 'daily';
+
+      // 3. ฟังก์ชันอัปเดตคำทำนายตามโหมดและตัวเลือก
+      function updatePrediction() {
+        // ย้ำให้หัวข้อเป็น Daily Lucky เสมอ (หากต้องการให้โชว์วัน/เดือน/ปีต่อท้าย ให้ดูหมายเหตุด้านล่าง)
+        dailyTitle.textContent = 'Daily Lucky';
+
+        if (currentPeriod === 'daily') {
+          const selectedDay = daySelect.value;
+          dailyMessage.textContent = `"ค่อยๆ ก้าวตามจังหวะของดวงดาวในวัน${selectedDay} ไม่ต้องก้าวเร็วไปให้เหนื่อยล้า ความสม่ำเสมอจะนำพา ให้ถึงคราประสบผลดั่งตั้งใจ"`;
+          workReading.textContent = `เกณฑ์การงานและการเรียนของวัน${selectedDay} มีจังหวะที่ราบรื่น ได้รับความร่วมมือที่ดีจากคนรอบข้าง`;
+          moneyReading.textContent = `การเงินในวัน${selectedDay} มีสภาพคล่องดี เหมาะกับการวางแผนเก็บออมและจัดการรายจ่าย`;
+          loveReading.textContent = `ความรักวัน${selectedDay} บรรยากาศอบอุ่น มีโอกาสได้พูดคุยปรับความเข้าใจกันมากขึ้น`;
+          luckyNumber.textContent = '9, 4';
+          luckyColor.textContent = 'สีม่วงพาสเทล';
+          luckyFocus.textContent = 'ช่วงเช้า 09:00 - 11:00 น.';
+
+        } else if (currentPeriod === 'monthly') {
+          const selectedMonth = monthSelect.value;
+          dailyMessage.textContent = `"สายลมแห่งเดือน${selectedMonth}พัดพาโอกาสใหม่ ความมุ่งมั่นที่สะสมไว้จะผลิดอกออกผลอย่างงดงาม"`;
+          workReading.textContent = `ตลอดเดือน${selectedMonth} จะมีโปรเจ็กต์หรือโอกาสใหม่ๆ เข้ามาให้แสดงฝีมืออย่างเต็มที่`;
+          moneyReading.textContent = `การเงินประจำเดือน${selectedMonth} มีเกณฑ์ได้รับผลตอบแทนที่คุ้มค่าจากความทุ่มเท`;
+          loveReading.textContent = `ความสัมพันธ์ในเดือน${selectedMonth} มีความชัดเจนและมั่นคงยิ่งขึ้น`;
+          luckyNumber.textContent = '2, 8';
+          luckyColor.textContent = 'สีน้ำเงินเข้ม';
+          luckyFocus.textContent = 'สัปดาห์ที่ 2 ของเดือน';
+
+        } else if (currentPeriod === 'yearly') {
+          const selectedYear = yearSelect.value;
+          dailyMessage.textContent = `"จักรวาลเปิดทางในปี พ.ศ. ${selectedYear} ก้าวข้ามขีดจำกัดเดิมสู่ความสำเร็จที่ยิ่งใหญ่กว่าเดิม"`;
+          workReading.textContent = `ภาพรวมปี พ.ศ. ${selectedYear} เป็นปีแห่งการเติบโตและการขยับขยายเป้าหมายใหญ่`;
+          moneyReading.textContent = `ความก้าวหน้าทางการเงินในปี ${selectedYear} มีจังหวะลงทุนและสร้างรากฐานที่มั่นคง`;
+          loveReading.textContent = `ความรักในปี ${selectedYear} เต็มไปด้วยการสนับสนุนซึ่งกันและกันในระยะยาว`;
+          luckyNumber.textContent = '1, 5, 9';
+          luckyColor.textContent = 'สีทอง, สีขาวมุก';
+          luckyFocus.textContent = 'ครึ่งปีหลังโดดเด่นเป็นพิเศษ';
+        }
+      }
+
+      // 4. เมื่อกดสลับแท็บ ดวงประจำวัน / ดวงประจำเดือน / ดวงประจำปี
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('is-active'));
+          tab.classList.add('is-active');
+          currentPeriod = tab.dataset.period;
+
+          if (currentPeriod === 'daily') {
+            daySelect.style.display = 'inline-block';
+            monthSelect.style.display = 'none';
+            yearSelect.style.display = 'none';
+            eyebrowText.textContent = 'YOUR DAILY COSMIC NOTE';
+            document.body.setAttribute('data-bg-mode', 'homepage');
+
+          } else if (currentPeriod === 'monthly') {
+            daySelect.style.display = 'none';
+            monthSelect.style.display = 'inline-block';
+            yearSelect.style.display = 'none';
+            eyebrowText.textContent = 'YOUR MONTHLY COSMIC NOTE';
+            document.body.setAttribute('data-bg-mode', 'homepage');
+
+          } else if (currentPeriod === 'yearly') {
+            daySelect.style.display = 'none';
+            monthSelect.style.display = 'none';
+            yearSelect.style.display = 'inline-block';
+            eyebrowText.textContent = 'YOUR YEARLY COSMIC NOTE';
+            document.body.setAttribute('data-bg-mode', 'about');
+          }
+
+          // อัปเดตคำทำนายทันทีเมื่อสลับแท็บ
+          updatePrediction();
+        });
+      });
+
+      // 5. เมื่อกดปุ่ม "เปิดคำทำนาย ✦"
+      predictBtn.addEventListener('click', updatePrediction);
+
+      // เรียกใช้งานครั้งแรกตอนเปิดหน้าเว็บ
+      updatePrediction();
+    });
+  </script>
 </body>
 </html>

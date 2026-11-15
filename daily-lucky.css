@@ -1,3 +1,60 @@
+/* =========================================================
+   ส่วนที่ 1: ตัวแปรตั้งค่าหลัก (CSS Variables)
+   คุณสามารถปรับเปลี่ยนชื่อไฟล์รูปภาพหรือเฉดสีม่วงพาสเทลได้จากจุดนี้จุดเดียว
+   ========================================================= */
+:root {
+  --bg-homepage: url('Homepage.jpg');
+  --bg-about: url('about.jpg');
+  --card-bg-gradient: linear-gradient(145deg, #21152fdc, #110b1cef);
+  --card-border: #d5b5ff36;
+  --card-border-hover: #d5b5ff80;
+  --btn-gradient: linear-gradient(135deg, #a95ee8, #642bb2);
+  --btn-gradient-hover: linear-gradient(125deg, #a960e7, #7437c2);
+  --text-main: #f1e7fa;
+  --text-muted: #bcaecb;
+  --text-accent: #e8caff;
+}
+
+/* =========================================================
+   ส่วนที่ 2: พื้นหลังจักรวาล (#cosmosBg และ .cosmos-shade)
+   ดึงรูป Homepage.jpg มาแสดงเป็นค่าเริ่มต้น และสลับเป็น about.jpg เมื่อดูดวงรายปี
+   ========================================================= */
+#cosmosBg,
+.daily-lucky-page .cosmos {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  background-color: #0d0718; /* สีพื้นหลังสำรองระหว่างรอโหลดรูป */
+  background-image: var(--bg-homepage);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transition: background-image 0.5s ease-in-out;
+}
+
+/* เมื่อ JavaScript เปลี่ยน data-bg-mode ที่ <body> เป็น "about" จะสลับรูปพื้นหลัง */
+body[data-bg-mode="about"] #cosmosBg,
+.daily-lucky-page[data-bg-mode="about"] .cosmos {
+  background-image: var(--bg-about);
+}
+
+/* เลเยอร์ฟิลเตอร์สีม่วงเข้มทับบนรูปภาพ เพื่อให้ตัวอักษรสีพาสเทลอ่านง่ายขึ้น */
+#cosmosBg .cosmos-shade,
+.daily-lucky-page .cosmos-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 38%, rgba(163, 92, 243, 0.16), rgba(16, 9, 29, 0.75) 70%),
+    linear-gradient(180deg, rgba(14, 8, 26, 0.45) 0%, rgba(22, 11, 40, 0.68) 55%, rgba(12, 7, 22, 0.92) 100%);
+  backdrop-filter: blur(2px);
+}
+
+/* =========================================================
+   ส่วนที่ 3: โครงสร้างหน้าเว็บและหัวข้อหลัก (Hero Section)
+   ========================================================= */
 .daily-main {
   position: relative;
   z-index: 1;
@@ -5,6 +62,7 @@
   margin: 0 auto;
   padding: clamp(52px, 9vw, 100px) 0 60px;
   text-align: center;
+  font-family: 'Prompt', sans-serif;
   animation: page-arrival 1.2s ease-out both;
 }
 
@@ -17,7 +75,7 @@
   letter-spacing: .18em;
 }
 
-.daily-eyebrow span {
+.daily-eyebrow span:first-child {
   color: #f4d293;
   font-size: 1.15rem;
 }
@@ -29,40 +87,222 @@
   background-clip: text;
   color: transparent;
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: clamp(2.6rem, 7vw, 4.5rem);
+  font-size: clamp(2.5rem, 6.5vw, 4.3rem);
   font-weight: 500;
   line-height: 1.2;
   text-shadow: none;
 }
 
 .daily-date {
-  color: #bcaecb;
+  color: var(--text-muted);
   font-size: .9rem;
   text-shadow: none;
 }
 
-.daily-message {
-  max-width: 740px;
-  margin: 25px auto 0;
-  color: #f1e7fa;
-  font-size: clamp(1.05rem, 2.2vw, 1.4rem);
-  line-height: 1.9;
-  text-shadow: 0 2px 16px #9a5bd555;
+/* =========================================================
+   ส่วนที่ 4: ปุ่มสลับแท็บ (วัน / เดือน / ปี) และตัวเลือกราศี
+   ========================================================= */
+.cosmic-tabs {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+  padding: 6px;
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  background: #10091de0;
+  box-shadow: 0 12px 30px #00000045, inset 0 1px #ffffff0a;
+  backdrop-filter: blur(12px);
 }
 
+.cosmic-tab {
+  padding: 10px 22px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  color: var(--text-muted);
+  background: transparent;
+  font-family: 'Prompt', sans-serif;
+  font-size: .92rem;
+  cursor: pointer;
+  transition: all .25s ease;
+}
+
+.cosmic-tab:hover {
+  color: #f4eaff;
+}
+
+.cosmic-tab.is-active {
+  border-color: #e4c4ff88;
+  color: #ffffff;
+  background: var(--btn-gradient);
+  box-shadow: 0 4px 18px #a35cf366;
+  font-weight: 500;
+}
+
+.cosmic-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  max-width: 520px;
+  margin: 18px auto 0;
+}
+
+.cosmic-select {
+  flex: 1;
+  padding: 12px 18px;
+  border: 1px solid #d5b5ff4d;
+  border-radius: 14px;
+  color: #f4eaff;
+  background: #140c24e6;
+  font-family: 'Prompt', sans-serif;
+  font-size: .95rem;
+  outline: none;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.cosmic-select:focus {
+  border-color: #dfbdff;
+  box-shadow: 0 0 16px #a35cf344;
+}
+
+.cosmic-select option {
+  color: #f4eaff;
+  background: #140c24;
+}
+
+.cosmic-predict-btn {
+  padding: 12px 22px;
+  border: 1px solid #dfbdff88;
+  border-radius: 14px;
+  color: #ffffff;
+  background: linear-gradient(125deg, #9850d9, #6229b1);
+  box-shadow: 0 8px 24px #00000045, 0 0 18px #a35cf340;
+  font-family: 'Prompt', sans-serif;
+  font-size: .95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.cosmic-predict-btn:hover {
+  transform: translateY(-2px);
+  background: var(--btn-gradient-hover);
+  box-shadow: 0 12px 28px #00000060, 0 0 22px #b469ff77;
+}
+
+/* ซ่อนข้อความ Label บนหน้าจอแต่ให้ระบบอ่านหน้าจอ (Screen Reader) ทำงานได้ */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* =========================================================
+   ส่วนที่ 5: กล่องคำทำนายภาพรวม และการ์ดเจาะลึก 3 ด้าน
+   ========================================================= */
+.daily-message {
+  max-width: 780px;
+  margin: 25px auto 0;
+  padding: 22px 28px;
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  background: linear-gradient(145deg, #21152fb8, #110b1cc8);
+  box-shadow: 0 14px 36px #00000040;
+  color: var(--text-main);
+  font-size: clamp(1.05rem, 2.1vw, 1.32rem);
+  font-weight: 300;
+  line-height: 1.9;
+  text-shadow: 0 2px 16px #9a5bd555;
+  backdrop-filter: blur(10px);
+}
+
+.daily-aspects {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 26px;
+  text-align: left;
+}
+
+.daily-aspect-card {
+  padding: 24px 22px;
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  background: var(--card-bg-gradient);
+  box-shadow: 0 18px 42px #00000038, inset 0 1px #ffffff08;
+  backdrop-filter: blur(12px);
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+
+.daily-aspect-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--card-border-hover);
+  box-shadow: 0 20px 40px #00000050, 0 0 20px #a35cf333;
+}
+
+.aspect-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #d5b5ff26;
+}
+
+/* ปรับสีไฟล์ PNG สีดำ (graduation-hat.png และ diagram.png) ให้กลายเป็นสีม่วงพาสเทลเรืองแสง */
+.aspect-icon {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  filter: invert(84%) sepia(24%) saturate(932%) hue-rotate(222deg) brightness(103%) contrast(102%) drop-shadow(0 0 8px rgba(194, 139, 240, 0.65));
+}
+
+.aspect-symbol {
+  font-size: 1.35rem;
+  filter: drop-shadow(0 0 10px rgba(194, 139, 240, 0.65));
+}
+
+.aspect-header h2 {
+  margin: 0;
+  color: var(--text-accent);
+  font-family: 'Prompt', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.daily-aspect-card p {
+  margin: 0;
+  color: #e7d8f1;
+  font-size: .92rem;
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+/* =========================================================
+   ส่วนที่ 6: การ์ดสิ่งนำโชค 3 ช่อง (เลขนำโชค / สีเสริมพลัง / จังหวะที่เหมาะ)
+   ========================================================= */
 .daily-highlights {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
-  margin-top: clamp(38px, 6vw, 60px);
+  margin-top: 20px;
 }
 
 .daily-highlight {
-  min-height: 176px;
+  min-height: 160px;
   padding: 25px 18px;
-  border: 1px solid #d5b5ff36;
+  border: 1px solid var(--card-border);
   border-radius: 20px;
-  background: linear-gradient(145deg, #21152fdc, #110b1ceF);
+  background: var(--card-bg-gradient);
   box-shadow: 0 18px 42px #00000038, inset 0 1px #ffffff08;
   backdrop-filter: blur(12px);
   transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
@@ -70,19 +310,19 @@
 
 .daily-highlight:hover {
   transform: translateY(-5px);
-  border-color: #d5b5ff80;
+  border-color: var(--card-border-hover);
   box-shadow: 0 20px 40px #00000050, 0 0 20px #a35cf333;
 }
 
 .daily-highlight > span {
-  color: #e8caff;
+  color: var(--text-accent);
   font-size: 1.4rem;
   text-shadow: 0 0 16px #c28bf0aa;
 }
 
 .daily-highlight p {
   margin: 8px auto 4px;
-  color: #bcaecb;
+  color: var(--text-muted);
   font-size: .83rem;
   text-shadow: none;
 }
@@ -107,6 +347,7 @@
   margin-top: 20px;
   color: #dfbdff;
   font-size: .87rem;
+  text-decoration: none;
 }
 
 .daily-back-link span {
@@ -117,10 +358,25 @@
   transform: translateX(4px);
 }
 
+/* =========================================================
+   ส่วนที่ 7: การปรับขนาดตามหน้าจอมือถือและแท็บเล็ต (Responsive)
+   ========================================================= */
+@media (max-width: 768px) {
+  .daily-aspects {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
 @media (max-width: 600px) {
   .daily-main {
     width: min(100% - 32px, 500px);
     padding-top: 54px;
+  }
+
+  .cosmic-controls {
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .daily-highlights {
@@ -152,6 +408,7 @@
   }
 
   .daily-highlight,
+  .daily-aspect-card,
   .daily-back-link span {
     transition: none;
   }
