@@ -10,6 +10,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const pickedIds = JSON.parse(pickedIdsRaw);
   const cards = pickedIds.map(id => getCardById(id)).filter(Boolean);
 
+  async function saveTarotReading() {
+    const readingKey = `savedTarotReading:${selectedCategory}:${pickedIds.join(',')}`;
+    if (sessionStorage.getItem(readingKey)) return;
+
+    const result = await saveFortuneHistory('tarot', selectedCategory, {
+      cards: cards.map((card) => ({
+        id: card.id,
+        name: card.name,
+        thaiName: card.thaiName,
+        prediction: card.meanings[selectedCategory] || card.meanings['รายวัน'],
+      })),
+    });
+
+    if (result.saved) sessionStorage.setItem(readingKey, 'true');
+  }
+
   document.getElementById('resultCategory').textContent = selectedCategory;
   document.getElementById('resultCount').textContent = `${cards.length} ใบ`;
 
@@ -150,4 +166,5 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   renderBoard();
+  saveTarotReading();
 });

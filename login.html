@@ -32,17 +32,21 @@
       <p class="account-eyebrow">WELCOME BACK</p>
       <h1 id="page-title">เข้าสู่ระบบ</h1>
       <p class="account-intro">กลับมาเปิดประตูสู่คำทำนายของคุณ</p>
-      <form class="account-form">
+      <form class="account-form" data-auth-form="login">
         <label for="login-email">อีเมล</label>
         <input id="login-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
         <label for="login-password">รหัสผ่าน</label>
         <input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="กรอกรหัสผ่าน" required>
-        <button type="button" class="account-submit" disabled>เข้าสู่ระบบเร็ว ๆ นี้</button>
+        <button type="submit" class="account-submit">เข้าสู่ระบบ</button>
       </form>
-      <p class="account-notice">หน้านี้เป็นตัวอย่างหน้าจอ ยังไม่มีระบบเข้าสู่ระบบหรือจัดเก็บข้อมูล</p>
+      <p class="account-notice" data-auth-message aria-live="polite">เข้าสู่ระบบเพื่อบันทึกและดูประวัติคำทำนายของคุณ</p>
       <p class="account-switch">ยังไม่มีบัญชี? <a href="register.html">สมัครสมาชิก</a></p>
     </section>
   </main>
-  <script src="home-chat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="supabase-client.js"></script>
+  <script src="auth.js"></script>
+  <script src="auth-nav.js"></script>
 </body>
 </html>

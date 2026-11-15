@@ -225,6 +225,13 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         matchProgressBar.style.width = `${result.percent}%`;
       }, 100);
+
+      saveFortuneHistory('blood-oracle', 'ความเข้ากันได้กรุ๊ปเลือด', {
+        description: `${selectedUserGroup} และ ${selectedPartnerGroup} เข้ากันได้ ${result.percent}%`,
+        userBloodGroup: selectedUserGroup,
+        partnerBloodGroup: selectedPartnerGroup,
+        compatibility: result.percent,
+      });
     }
   });
 
@@ -294,6 +301,12 @@ document.addEventListener('DOMContentLoaded', () => {
           oracleCardSubtitle.innerText = card.thaiTitle;
           oracleMessage.innerText = `“${card.readings[selectedOracleGroup]}”`;
           oracleReadingBox.classList.add('show');
+          saveFortuneHistory('blood-oracle', `กรุ๊ปเลือด ${selectedOracleGroup}`, {
+            description: `${card.thaiTitle} สำหรับกรุ๊ปเลือด ${selectedOracleGroup}`,
+            bloodGroup: selectedOracleGroup,
+            card: card.name,
+            reading: card.readings[selectedOracleGroup],
+          });
         }, 420);
       });
 

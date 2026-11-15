@@ -1,4 +1,10 @@
 (() => {
+  if (!document.querySelector('script[src="auth-nav.js"]')) {
+    const authNav = document.createElement('script');
+    authNav.src = 'auth-nav.js';
+    document.head.appendChild(authNav);
+  }
+
   if (!document.querySelector('.admin-chat-toggle')) {
     document.body.insertAdjacentHTML('beforeend', `
       <button class="admin-chat-toggle" type="button" aria-label="เปิดแชทติดต่อแอดมิน" aria-expanded="false" aria-controls="admin-chat-panel">

@@ -33,15 +33,25 @@
       <p class="account-eyebrow">YOUR SPACE</p>
       <h1 id="page-title">โปรไฟล์ของฉัน</h1>
       <p class="account-intro">พื้นที่สำหรับข้อมูลและประวัติการดูดวงของคุณ</p>
-      <dl class="profile-details">
-        <div><dt>ชื่อที่ใช้แสดง</dt><dd>ผู้ใช้งานตัวอย่าง</dd></div>
-        <div><dt>อีเมล</dt><dd>ยังไม่ได้เข้าสู่ระบบ</dd></div>
-        <div><dt>ประวัติการดูดวง</dt><dd>ยังไม่มีข้อมูล</dd></div>
-      </dl>
-      <p class="account-notice">หน้านี้เป็นตัวอย่าง โปรไฟล์จริงจะใช้งานได้เมื่อมีระบบสมาชิก</p>
-      <a class="account-submit profile-login" href="login.html">เข้าสู่ระบบ</a>
+      <div data-profile-signed-out hidden>
+        <p class="account-notice">กรุณาเข้าสู่ระบบเพื่อดูประวัติคำทำนายของคุณ</p>
+        <a class="account-submit profile-login" href="login.html">เข้าสู่ระบบ</a>
+      </div>
+      <div data-profile-signed-in hidden>
+        <dl class="profile-details">
+          <div><dt>ชื่อที่ใช้แสดง</dt><dd data-profile-name></dd></div>
+          <div><dt>อีเมล</dt><dd data-profile-email></dd></div>
+          <div><dt>ประวัติการดูดวง</dt><dd data-history-count>กำลังโหลด...</dd></div>
+        </dl>
+        <section class="history-list" data-history-list aria-live="polite"></section>
+        <button type="button" class="account-submit profile-login" data-sign-out>ออกจากระบบ</button>
+      </div>
     </section>
   </main>
-  <script src="home-chat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="supabase-client.js"></script>
+  <script src="profile.js"></script>
+  <script src="auth-nav.js"></script>
 </body>
 </html>

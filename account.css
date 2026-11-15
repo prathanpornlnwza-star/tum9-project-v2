@@ -145,6 +145,31 @@ button.account-submit:disabled {
   font-size: 14px;
 }
 
+.account-notice.is-error {
+  color: #ffadc6;
+}
+
+.history-list {
+  display: grid;
+  gap: 10px;
+  max-height: 320px;
+  margin-top: 16px;
+  overflow-y: auto;
+  text-align: left;
+}
+
+.history-item {
+  display: grid;
+  gap: 3px;
+  padding: 12px 14px;
+  border: 1px solid #d5b5ff24;
+  border-radius: 10px;
+  background: #ffffff08;
+}
+
+.history-item strong { color: #f4edf7; font-size: 13px; }
+.history-item span, .history-item time { color: #bca9ce; font-size: 12px; }
+
 @media (max-width: 600px) {
   .account-main {
     padding: 32px 16px;

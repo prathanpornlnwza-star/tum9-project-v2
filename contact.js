@@ -31,8 +31,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const modal = document.querySelector('#successModal');
   document.querySelector('#oracleForm').addEventListener('submit', (event) => {
     event.preventDefault();
+    const topic = selectedTopic.value;
     document.querySelector('#trackingCode').textContent = `TUM9-${Math.floor(100000 + Math.random() * 900000)}`;
     modal.classList.add('is-open');
+    saveFortuneHistory('contact', topic, {
+      description: `ส่งข้อความติดต่อเกี่ยวกับ${topic}`,
+      topic,
+    });
     event.currentTarget.reset();
   });
 

@@ -428,6 +428,13 @@
       resultViewButton.hidden = false;
       resultViewButton.disabled = false;
       showResult(savedSpin);
+      const reading = luckyNumberReadings[result];
+      saveFortuneHistory('lucky-wheel', reading.category, {
+        description: `เลขนำโชค ${result}: ${reading.title}`,
+        number: result,
+        meaning: reading.meaning,
+        advice: reading.advice,
+      });
     }
 
     if (reducedMotion) {

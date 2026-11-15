@@ -829,6 +829,17 @@
       renderDashboard(chart, name, dateStr, timeStr, provinceName);
       document.getElementById('resultsDashboard').classList.remove('hidden');
 
+      saveFortuneHistory('birth-chart', 'Birth Chart', {
+        description: `ดวงกำเนิดของ ${name || 'ผู้ใช้งาน'} · ${provinceName}`,
+        birthDate: dateStr,
+        birthTime: unknownTime ? null : timeStr,
+        province: provinceName,
+        bigThree: ['sun', 'moon', 'asc'].map((key) => ({
+          planet: chart.placements[key].name,
+          sign: chart.placements[key].sign.th,
+        })),
+      });
+
       if (notify) {
         showToast('คำนวณแผนที่ดวงดาวของคุณเรียบร้อยแล้ว ✦');
         document.getElementById('resultsDashboard').scrollIntoView({ behavior: 'smooth', block: 'start' });

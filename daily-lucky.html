@@ -198,6 +198,9 @@
   <script src="home-chat.js"></script>
 
   <!-- ========== สคริปต์ควบคุมการทำงานทั้งหมด (ไม่มีคำว่าราศีเมษ) ========== -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="supabase-client.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // 1. อ้างอิง Element จากหน้าเว็บ
@@ -305,7 +308,29 @@
       });
 
       // 5. เมื่อกดปุ่ม "เปิดคำทำนาย ✦"
-      predictBtn.addEventListener('click', updatePrediction);
+      predictBtn.addEventListener('click', () => {
+        updatePrediction();
+        const periodLabel = {
+          daily: 'ดวงรายวัน',
+          monthly: 'ดวงรายเดือน',
+          yearly: 'ดวงรายปี'
+        }[currentPeriod];
+
+        const selectedValue = currentPeriod === 'daily'
+          ? daySelect.value
+          : currentPeriod === 'monthly'
+            ? monthSelect.value
+            : yearSelect.value;
+
+        saveFortuneHistory('daily-lucky', periodLabel, {
+          description: `${periodLabel} · ${selectedValue}`,
+          period: currentPeriod,
+          selectedValue,
+          luckyNumber: luckyNumber.textContent,
+          luckyColor: luckyColor.textContent,
+          message: dailyMessage.textContent,
+        });
+      });
 
       // เรียกใช้งานครั้งแรกตอนเปิดหน้าเว็บ
       updatePrediction();
