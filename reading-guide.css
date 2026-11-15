@@ -1,0 +1,218 @@
+.reading-guide-main {
+  position: relative;
+  z-index: 1;
+  width: min(1120px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: clamp(54px, 8vw, 100px) 0 56px;
+}
+
+.reading-guide-hero {
+  max-width: 760px;
+  margin: 0 auto clamp(54px, 8vw, 88px);
+  text-align: center;
+}
+
+.reading-guide-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: #d7b7f0;
+  font-size: .75rem;
+  letter-spacing: .19em;
+}
+
+.reading-guide-eyebrow span {
+  color: #e2bdff;
+  font-size: 1.15rem;
+}
+
+.reading-guide-hero h1 {
+  margin: 15px 0 12px;
+  background: linear-gradient(100deg, #f8edff 18%, #d2a7ff 58%, #9bdcff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: clamp(2rem, 5vw, 3.8rem);
+  line-height: 1.3;
+}
+
+.reading-guide-hero > p,
+.reading-guide-section-heading > p {
+  color: #c8bddb;
+  font-size: clamp(.92rem, 1.5vw, 1.05rem);
+  line-height: 1.95;
+}
+
+.reading-guide-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.reading-guide-actions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 17px;
+  border: 1px solid #d5b5ff68;
+  border-radius: 999px;
+  color: #f5eaff;
+  background: #9a5bd522;
+  font-size: .88rem;
+  transition: background .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+.reading-guide-actions a:hover {
+  transform: translateY(-2px);
+  border-color: #e4c4ff;
+  background: #9a5bd54a;
+}
+
+.reading-guide-actions a span {
+  color: #e2bdff;
+}
+
+.reading-guide-section-heading {
+  margin-bottom: 22px;
+}
+
+.reading-guide-section-heading h2 {
+  margin-top: 8px;
+  color: #f7efff;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.reading-guide-section-heading > p {
+  margin-top: 7px;
+  font-size: .9rem;
+}
+
+.reading-guide-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.reading-guide-card,
+.reading-guide-step,
+.reading-guide-note {
+  border: 1px solid #d5b5ff30;
+  border-radius: 18px;
+  background: linear-gradient(155deg, #21152fdd, #110b1cef);
+  box-shadow: 0 16px 38px #00000038, inset 0 1px #ffffff08;
+}
+
+.reading-guide-card {
+  padding: 22px;
+}
+
+.reading-guide-card > span,
+.reading-guide-step-number {
+  color: #dfbdff;
+  font-size: .75rem;
+  letter-spacing: .12em;
+}
+
+.reading-guide-card h3,
+.reading-guide-step h3 {
+  margin-top: 9px;
+  color: #f7efff;
+  font-size: 1.02rem;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.reading-guide-card p,
+.reading-guide-step p,
+.reading-guide-note p {
+  margin-top: 8px;
+  color: #c8bddb;
+  font-size: .87rem;
+  line-height: 1.85;
+}
+
+.reading-guide-steps {
+  display: grid;
+  gap: 12px;
+  margin-top: clamp(42px, 7vw, 72px);
+  scroll-margin-top: 24px;
+}
+
+.reading-guide-step {
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  gap: 16px;
+  padding: 20px 22px;
+}
+
+.reading-guide-step-number {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 1px solid #d5b5ff55;
+  border-radius: 50%;
+  background: #9a5bd522;
+}
+
+.reading-guide-step h3 {
+  margin-top: 0;
+}
+
+.reading-guide-note {
+  margin-top: 24px;
+  padding: 22px;
+}
+
+.reading-guide-note h2 {
+  color: #f7efff;
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.reading-guide-note p {
+  margin-bottom: 0;
+}
+
+@media (max-width: 760px) {
+  .reading-guide-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .reading-guide-main {
+    width: calc(100% - 32px);
+    padding-top: 48px;
+  }
+
+  .reading-guide-hero {
+    margin-bottom: 58px;
+  }
+
+  .reading-guide-hero h1 {
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
+  }
+
+  .reading-guide-step {
+    grid-template-columns: 38px 1fr;
+    gap: 12px;
+    padding: 17px 14px;
+  }
+
+  .reading-guide-step-number {
+    width: 34px;
+    height: 34px;
+    font-size: .65rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reading-guide-actions a {
+    transition: none;
+  }
+}

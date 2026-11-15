@@ -11,7 +11,7 @@ tarotData.forEach(card => uniqueCardsById.set(card.id, card));
 const cards = [...uniqueCardsById.values()].sort((first, second) => first.id - second.id);
 const cardImageOverrides = new Map([
   ['ACE OF CUPS', 'cards/ACE OF CUPS.jpg'],
-  ['QUEEN OF CUPS', 'cards/QUEEN OF CUP.jpg']
+  ['QUEEN OF CUPS', 'cards/QUEEN OF CUPS.jpg']
 ]);
 const suitLabels = {
   wands: 'ไม้เท้า',

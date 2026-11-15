@@ -81,21 +81,20 @@ body[data-bg-mode="about"] #cosmosBg,
 }
 
 .daily-hero h1 {
-  margin: 14px 0 5px;
-  background: linear-gradient(100deg, #fff2d6 18%, #d2a7ff 60%, #9bdcff);
+  margin: 15px 0 12px;
+  background: linear-gradient(100deg, #f8edff 18%, #d2a7ff 58%, #9bdcff);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: clamp(2.5rem, 6.5vw, 4.3rem);
-  font-weight: 500;
-  line-height: 1.2;
+  font-size: clamp(2rem, 5vw, 3.8rem);
+  line-height: 1.3;
   text-shadow: none;
 }
 
 .daily-date {
   color: var(--text-muted);
   font-size: .9rem;
+  text-align: center;
   text-shadow: none;
 }
 
@@ -256,14 +255,6 @@ body[data-bg-mode="about"] #cosmosBg,
   margin-bottom: 12px;
   padding-bottom: 12px;
   border-bottom: 1px solid #d5b5ff26;
-}
-
-/* ปรับสีไฟล์ PNG สีดำ (graduation-hat.png และ diagram.png) ให้กลายเป็นสีม่วงพาสเทลเรืองแสง */
-.aspect-icon {
-  width: 26px;
-  height: 26px;
-  object-fit: contain;
-  filter: invert(84%) sepia(24%) saturate(932%) hue-rotate(222deg) brightness(103%) contrast(102%) drop-shadow(0 0 8px rgba(194, 139, 240, 0.65));
 }
 
 .aspect-symbol {
